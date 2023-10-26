@@ -2,7 +2,7 @@
     <div class="container d-flex">
       <div class="header__inner d-flex justify-content-between align-items-center">
           <a class="logo" href="">
-              <img src="./assets/img/logo.svg" alt="logo">
+              <img class="logo-img" src="./assets/img/logo.svg" alt="logo">
           </a>
 
           <nav class="menu">
@@ -24,11 +24,10 @@
 
           <div class="search d-flex">
               <div class="search__input">
-                  <img src="./assets/img/search.svg" alt="">
-                  <label for="">
-                    <input type="text">
-                  </label>
-                  
+                <img src="./assets/img/search.svg" alt="">
+                <label for="">
+                  <input type="text">
+                </label>
               </div>
 
               <li class="profile">
@@ -51,9 +50,13 @@
   </div>
 
   <section class="main">
-    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
-      <img v-for="recipe in recipes" :src="recipe.thumbnail_url" alt="" style="width: 200px;">
-
+    <div class="headline">
+      <h1> Recipe
+        <p>Marketplace</p>
+      </h1>
+    </div>
+    <div class="recipe-img__wrapper" style="display: grid;">
+      <img class="recipe-img" v-for="recipe in recipes" :src="recipe.thumbnail_url" alt="">
     </div>
   </section>
 </template>
@@ -68,6 +71,7 @@
       return{
         apiKey: 'fbf234dd69a143dca2d87a54c359a1cb',
         recipes: [],
+        currentSlide: 0,
       }
     },
     methods: {
@@ -96,5 +100,30 @@
 </script>
 
 <style>
+.logo {
+  width: 100px;
+}
+.logo-img {
+  width: 150px;
+  height: 250px;
+  object-fit: contain;
+}
 
+.main{
+  display: flex;
+  justify-content: space-between;
+  height: 750px;
+  overflow: hidden;
+}
+.recipe-img{
+  width: 160px;
+  height: 238px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.recipe-img__wrapper{
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 36px;
+}
 </style>
