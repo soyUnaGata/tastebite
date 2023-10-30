@@ -55,9 +55,12 @@
         <p>Marketplace</p>
       </h1>
     </div>
-    <div class="recipe-img__wrapper" style="display: grid;">
-      <img class="recipe-img" v-for="recipe in recipes" :src="recipe.thumbnail_url" alt="">
+    <div class="recipe-img__wrapper"> 
+      <div class="background" v-for="(recipe, index) in recipes" :key="recipe.id">
+        <img class="picture" :src="recipe.thumbnail_url" alt="logo">
+      </div>
     </div>
+    
   </section>
 </template>
 
@@ -72,6 +75,7 @@
         apiKey: 'fbf234dd69a143dca2d87a54c359a1cb',
         recipes: [],
         currentSlide: 0,
+        carouselInterval: null,
       }
     },
     methods: {
@@ -95,6 +99,19 @@
       // if(response.results){
       //   response.results.forEach(x => this.recipes.push(x))
       // }
+    },
+    computed: {
+      backgroundImageUrl() {
+        const imageUrls = this.recipes
+        .filter(recipe => recipe.thumbnail_url)
+        .map(recipe => recipe.thumbnail_url);
+      return imageUrls;
+    },
+    backgroundStyle() {
+      return {
+        backgroundImage: `url('${this.backgroundImageUrl}')`,
+      };
+    },
     }
   }
 </script>
@@ -112,18 +129,38 @@
 .main{
   display: flex;
   justify-content: space-between;
-  height: 750px;
+  height: 650px;
   overflow: hidden;
 }
-.recipe-img{
+.recipe-img__wrapper {
+  height: 238px; 
+}
+.picture {
   width: 160px;
   height: 238px;
   object-fit: cover;
   border-radius: 10px;
 }
-
-.recipe-img__wrapper{
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 36px;
+.background {
+  background-repeat: repeat-y;
+  background-position: center;
+  background-size: contain;
+  animation: scroll 30s linear infinite;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
+@keyframes scroll {
+  from {
+    transform: translate(0);
+  }
+  to {
+    transform: translateY(calc(100% - 1000vh));
+  }
+}
+
+
+
 </style>
