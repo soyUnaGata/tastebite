@@ -69,7 +69,7 @@
     </div>
     <div class="recipe-img__wrapper"> 
       <image-carousel
-      :recipesImgCarousel="recipesImgCarousel"
+      :recipes-img-carousel="imagesUrl"
       />
     </div>
     
@@ -107,17 +107,18 @@
     },
     computed: {
       imagesUrl() {
-        const firstImgs = this.recipes
-        .filter(recipe => recipe.thumbnail_url)
-        .map(recipe => recipe.thumbnail_url);
+        // const firstImgs = this.recipes
+        // .filter(recipe => recipe.thumbnail_url)
+        // .map(recipe => recipe.thumbnail_url);
 
-        const additionlImgs = this.recipesAll
-        .filter(meal => meal.thumb)
-        .map(meal => meal.thumb);
+        // const additionlImgs = this.recipesAll
+        // .filter(meal => meal.thumb)
+        // .map(meal => meal.thumb);
 
-        this.recipesImgCarousel = [...firstImgs, ...additionlImgs];
+        // this.recipesImgCarousel = [...firstImgs, ...additionlImgs];
 
-        return this.recipesImgCarousel;
+        // return this.recipesImgCarousel;
+        return this.recipes.map(r => r.thumbnail_url).concat(this.recipesAll.map(m => m.thumb)).filter(src => !!src);
       },
       async allRecipes(){
         const response = await axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + this.searchRecipe)
