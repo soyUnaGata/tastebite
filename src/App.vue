@@ -23,11 +23,23 @@
           </nav>
 
           <div class="search d-flex">
-              <div class="search__input">
-                <img src="./assets/img/search.svg" alt="">
-                <label for="">
-                  <input type="text">
+              <div class="search__wrapper">
+                <label 
+                class="search__input"
+                v-show="searchInputState" 
+                for="">
+                  <input 
+                  v-model="searchRecipe" 
+                  type="text">
                 </label>
+                <ul class="recipes__list" v-for="recipe in searchedRecipe">
+                  <li>{{ recipe.title }}</li>
+                </ul>
+                <img 
+                class="search__icon"
+                @click="showSearchInput"
+                src="./assets/img/search.svg" 
+                alt="">
               </div>
 
               <li class="profile">
@@ -56,62 +68,86 @@
       </h1>
     </div>
     <div class="recipe-img__wrapper"> 
-      <div class="background" v-for="(recipe, index) in recipes" :key="recipe.id">
-        <img class="picture" :src="recipe.thumbnail_url" alt="logo">
-      </div>
+      <image-carousel
+      :recipesImgCarousel="recipesImgCarousel"
+      />
     </div>
     
   </section>
 </template>
 
 <script>
-  import api from './services/api.js'
+  import {recipes, instance} from './services/api.js';
+  import axios from "axios";
+  import ImageCarousel from './components/ImageCarousel.vue';
+
   export default {
     components: {
-     
+     ImageCarousel
     },
     data(){
       return{
         apiKey: 'fbf234dd69a143dca2d87a54c359a1cb',
         recipes: [],
+        recipesImgCarousel: [],
         currentSlide: 0,
-        carouselInterval: null,
+        searchInputState: false,
+        recipesAll: [],
+        searchRecipe: '',
       }
     },
     methods: {
-      // async loadRecipes(){
-      //   const response = await RecipesService.getAll();
-      //   // if(response.results){
-      
-      //   // }
-      // },
+      showSearchInput(){
+        this.searchInputState = true;
+      }
     },
     async mounted(){
-      // const response = await api.get('/complexSearch?apiKey=' + this.apiKey)
-      //   .then(response => response.data)
-      //   .then(recipes => recipes.map(async (r) => {
-      //     r.images = await api.get('/complexSearch?apiKey=' + this.apiKey).then(response => response.data);
-      //     return r;
-      //   }));
-      this.recipes = await api.get('https://tasty.p.rapidapi.com/recipes/list')
+      this.recipes = await instance.get('https://tasty.p.rapidapi.com/recipes/list')
         .then(response => response.data.results)
-      
-      // if(response.results){
-      //   response.results.forEach(x => this.recipes.push(x))
-      // }
     },
     computed: {
-      backgroundImageUrl() {
-        const imageUrls = this.recipes
+      imagesUrl() {
+        const firstImgs = this.recipes
         .filter(recipe => recipe.thumbnail_url)
         .map(recipe => recipe.thumbnail_url);
-      return imageUrls;
-    },
-    backgroundStyle() {
-      return {
-        backgroundImage: `url('${this.backgroundImageUrl}')`,
-      };
-    },
+
+        const additionlImgs = this.recipesAll
+        .filter(meal => meal.thumb)
+        .map(meal => meal.thumb);
+
+        this.recipesImgCarousel = [...firstImgs, ...additionlImgs];
+
+        return this.recipesImgCarousel;
+      },
+      async allRecipes(){
+        const response = await axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + this.searchRecipe)
+        .then(response => response.data)
+        .then(response => {
+            if(!response.meals) return [];  
+            return this.recipesAll = response.meals
+              .map(meal => (
+                {
+                  id: meal.idMeal,
+                  meal: meal.strMeal,
+                  drinkAlternate: meal.strDrinkAlternate,
+                  category: meal.strCategory,
+                  area: meal.strArea,
+                  instructions: meal.strInstructions, 
+                  thumb: meal.strMealThumb,
+                  youtube: meal.strYoutube,
+                  ingredients: Object.keys(meal).filter(p => p.includes('Ingredient')).map(p => meal[p]),
+                  measures: Object.keys(meal).filter(p => p.includes('Measure')).map(p => meal[p]),
+                  source: meal.strSource,
+                  imageSource: meal.strImageSource
+                } 
+            )) 
+          }
+        )
+        console.log(response)
+      },
+      searchedRecipe(){
+        // return this.recipesAll.filter((recipe) => recipe.title.toLowerCase().includes(this.searchRecipe.toLowerCase()))
+      }
     }
   }
 </script>
@@ -134,31 +170,6 @@
 }
 .recipe-img__wrapper {
   height: 238px; 
-}
-.picture {
-  width: 160px;
-  height: 238px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-.background {
-  background-repeat: repeat-y;
-  background-position: center;
-  background-size: contain;
-  animation: scroll 30s linear infinite;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-@keyframes scroll {
-  from {
-    transform: translate(0);
-  }
-  to {
-    transform: translateY(calc(100% - 1000vh));
-  }
 }
 
 

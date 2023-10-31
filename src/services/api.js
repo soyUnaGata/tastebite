@@ -1,10 +1,10 @@
 import axios from "axios";
 
 
-// const instance = axios.create({
-//     baseURL: "https://api.spoonacular.com/recipes",
-//     headers: {'content-type':'application/json'}
-// });
+const recipes = axios.create({
+    baseURL: "www.themealdb.com/api/json/v1/1/search.php",
+    headers: {'content-type':'application/json'}
+});
 
 const instance = axios.create({
     headers: {
@@ -14,4 +14,4 @@ const instance = axios.create({
     },
 })
 
-export default instance;
+export  {recipes, instance};
