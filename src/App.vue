@@ -2,7 +2,7 @@
     <div class="container d-flex">
       <div class="header__inner d-flex justify-content-between align-items-center">
           <a class="logo" href="">
-              <img class="logo-img" src="./assets/img/logo.svg" alt="logo">
+              <!-- <img class="logo-img" src="./assets/img/logo.svg" alt="logo"> -->
           </a>
 
           <nav class="menu">
@@ -35,11 +35,11 @@
                 <ul class="recipes__list" v-for="recipe in searchedRecipe">
                   <li>{{ recipe.title }}</li>
                 </ul>
-                <img 
+                <!-- <img 
                 class="search__icon"
                 @click="showSearchInput"
                 src="./assets/img/search.svg" 
-                alt="">
+                alt=""> -->
               </div>
 
               <li class="profile">
@@ -67,24 +67,37 @@
         <p>Marketplace</p>
       </h1>
     </div>
-    <div class="recipe-img__wrapper"> 
+    <testcarousel :imgs="[
+            '/img/pumpkin_1.jpg',
+            '/img/pumpkin_2.jpg',
+            '/img/pumpkin_3.jpg',
+            '/img/logo.svg',
+            '/img/account.svg',
+            '/img/search.svg'
+        ]"
+        :count="5"/>
+    <!-- <div class="recipe-img__wrapper"> 
       <image-carousel
-      :recipes-img-carousel="imagesUrl"
+      :img-carousel="imagesUrl"
       />
-    </div>
+    </div> -->
     
   </section>
+
+
 </template>
 
 <script>
   import {recipes, instance} from './services/api.js';
   import axios from "axios";
   import ImageCarousel from './components/ImageCarousel.vue';
+  import Testcarousel from './components/testcarousel.vue';
 
   export default {
     components: {
-     ImageCarousel
-    },
+    ImageCarousel,
+    Testcarousel
+},
     data(){
       return{
         apiKey: 'fbf234dd69a143dca2d87a54c359a1cb',
@@ -101,23 +114,12 @@
         this.searchInputState = true;
       }
     },
-    async mounted(){
-      this.recipes = await instance.get('https://tasty.p.rapidapi.com/recipes/list')
-        .then(response => response.data.results)
-    },
+    // async mounted(){
+    //   this.recipes = await instance.get('https://tasty.p.rapidapi.com/recipes/list')
+    //     .then(response => response.data.results)
+    // },
     computed: {
       imagesUrl() {
-        // const firstImgs = this.recipes
-        // .filter(recipe => recipe.thumbnail_url)
-        // .map(recipe => recipe.thumbnail_url);
-
-        // const additionlImgs = this.recipesAll
-        // .filter(meal => meal.thumb)
-        // .map(meal => meal.thumb);
-
-        // this.recipesImgCarousel = [...firstImgs, ...additionlImgs];
-
-        // return this.recipesImgCarousel;
         return this.recipes.map(r => r.thumbnail_url).concat(this.recipesAll.map(m => m.thumb)).filter(src => !!src);
       },
       async allRecipes(){
