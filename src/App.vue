@@ -33,13 +33,13 @@
                   type="text">
                 </label>
                 <ul class="recipes__list" v-for="recipe in searchedRecipe">
-                  <li>{{ recipe.title }}</li>
+                  <li>{{ recipe.meal }}</li>
                 </ul>
-                <!-- <img 
+                <img 
                 class="search__icon"
                 @click="showSearchInput"
                 src="./assets/img/search.svg" 
-                alt=""> -->
+                alt="">
               </div>
 
               <li class="profile">
@@ -102,10 +102,8 @@
       return{
         apiKey: 'fbf234dd69a143dca2d87a54c359a1cb',
         recipes: [],
-        recipesImgCarousel: [],
-        currentSlide: 0,
+        imgCarousel: [],
         searchInputState: false,
-        recipesAll: [],
         searchRecipe: '',
       }
     },
@@ -120,14 +118,14 @@
     // },
     computed: {
       imagesUrl() {
-        return this.recipes.map(r => r.thumbnail_url).concat(this.recipesAll.map(m => m.thumb)).filter(src => !!src);
+        return this.imgCarousel = this.recipes.map(m => m.thumb).filter(src => !!src);
       },
       async allRecipes(){
         const response = await axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + this.searchRecipe)
         .then(response => response.data)
         .then(response => {
             if(!response.meals) return [];  
-            return this.recipesAll = response.meals
+            return this.recipes = response.meals
               .map(meal => (
                 {
                   id: meal.idMeal,
@@ -146,10 +144,13 @@
             )) 
           }
         )
-        console.log(response)
+        .catch(error => {
+          console.log(error)
+        })
       },
       searchedRecipe(){
-        // return this.recipesAll.filter((recipe) => recipe.title.toLowerCase().includes(this.searchRecipe.toLowerCase()))
+        console.log(this.recipes)
+        return this.recipes.filter((recipe) => recipe.meal.toLowerCase().includes(this.searchRecipe.toLowerCase()))
       }
     }
   }
