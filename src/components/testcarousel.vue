@@ -1,7 +1,7 @@
 <template> 
     <TransitionGroup tag="ul" name="fade" class="container" :key="imgs">
-      <div v-for="item in viwedImages" class="item" :key="item">
-        <img :src="item" alt="" class="test-img">
+      <div v-for="img in viwedImages" class="item" :key="img">
+        <img :src="img" alt="" class="test-img">
       </div>
     </TransitionGroup>
 </template>
@@ -25,18 +25,33 @@ export default {
     return {
         viwedImages: [],
         index: 0,
+        interval: null
+    }
+  },
+  watch: {
+    'imgs.length': function() {
+      this.interval && clearInterval(this.interval);
+      this.render();
+    }
+  },
+  methods: {
+    render() {
+      this.viwedImages = this.imgs.slice(0, this.count);
+      this.index = this.count;
+      this.interval = setInterval(() => {
+          let index = this.index % this.imgs.length;
+          this.index++;
+          this.viwedImages.push(this.imgs[index]);
+          this.viwedImages.shift();
+          
+      },2000) 
     }
   },
   mounted(){
-    this.viwedImages = this.imgs.slice(0, this.count);
-    this.index = this.count;
-    setInterval(() => {
-        let index = this.index % this.imgs.length;
-        this.index++;
-        this.viwedImages.push(this.imgs[index]);
-        this.viwedImages.shift();
-        
-    },2000) 
+    if(this.imgs.length) this.render();
+  },
+  unmounted() {
+    this.interval && clearInterval(this.interval);
   }
 }
 </script>
@@ -50,7 +65,7 @@ export default {
     gap: 40px;
 }
 .test-img {
-    height: 50px;
+    height: 300px;
     object-fit: cover;
 }
 .item {

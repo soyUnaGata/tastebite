@@ -30,6 +30,7 @@
                 for="">
                   <input 
                   v-model="searchRecipe" 
+                  @input="allRecipes"
                   type="text">
                 </label>
                 <ul class="recipes__list" v-for="recipe in searchedRecipe">
@@ -67,20 +68,8 @@
         <p>Marketplace</p>
       </h1>
     </div>
-    <testcarousel :imgs="[
-            '/img/pumpkin_1.jpg',
-            '/img/pumpkin_2.jpg',
-            '/img/pumpkin_3.jpg',
-            '/img/logo.svg',
-            '/img/account.svg',
-            '/img/search.svg'
-        ]"
+    <testcarousel :imgs="imagesUrl"
         :count="5"/>
-    <!-- <div class="recipe-img__wrapper"> 
-      <image-carousel
-      :img-carousel="imagesUrl"
-      />
-    </div> -->
     
   </section>
 
@@ -88,7 +77,6 @@
 </template>
 
 <script>
-  import {recipes, instance} from './services/api.js';
   import axios from "axios";
   import ImageCarousel from './components/ImageCarousel.vue';
   import Testcarousel from './components/testcarousel.vue';
@@ -110,22 +98,13 @@
     methods: {
       showSearchInput(){
         this.searchInputState = true;
-      }
-    },
-    // async mounted(){
-    //   this.recipes = await instance.get('https://tasty.p.rapidapi.com/recipes/list')
-    //     .then(response => response.data.results)
-    // },
-    computed: {
-      imagesUrl() {
-        return this.imgCarousel = this.recipes.map(m => m.thumb).filter(src => !!src);
       },
       async allRecipes(){
-        const response = await axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + this.searchRecipe)
+        this.recipes = await axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + this.searchRecipe)
         .then(response => response.data)
         .then(response => {
             if(!response.meals) return [];  
-            return this.recipes = response.meals
+            return response.meals
               .map(meal => (
                 {
                   id: meal.idMeal,
@@ -148,6 +127,16 @@
           console.log(error)
         })
       },
+    },
+    async mounted(){
+      await this.allRecipes();
+    },
+    computed: {
+      imagesUrl() {
+        const recipeImgs = Array.from(this.recipes.map(m => m.thumb).filter(src => !!src));
+        return recipeImgs;
+      },
+      
       searchedRecipe(){
         console.log(this.recipes)
         return this.recipes.filter((recipe) => recipe.meal.toLowerCase().includes(this.searchRecipe.toLowerCase()))
