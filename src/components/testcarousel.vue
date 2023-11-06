@@ -1,8 +1,8 @@
 <template> 
-    <TransitionGroup tag="ul" name="fade" class="container" :key="imgs">
-      <div v-for="img in viwedImages" class="item" :key="img">
-        <img :src="img" alt="" class="test-img">
-      </div>
+    <TransitionGroup tag="ul" name="fade" class="container" :key="imgs" :duration="duration">
+      <li v-for="img in viwedImages" class="item" :key="img">
+        <img :src="img" alt="" class="item-img">
+      </li>
     </TransitionGroup>
 </template>
 
@@ -13,19 +13,24 @@
 export default { 
   props: { 
     imgs: {
-        type: Array,
-        required: true
+      type: Array,
+      required: true
     },
     count: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0
+    },
+    duration: {
+      type: Number,
+      default: 1000
     }
+
   },
   data() {
     return {
-        viwedImages: [],
-        index: 0,
-        interval: null
+      viwedImages: [],
+      index: 0,
+      interval: null
     }
   },
   watch: {
@@ -44,7 +49,7 @@ export default {
           this.viwedImages.push(this.imgs[index]);
           this.viwedImages.shift();
           
-      },2000) 
+      },this.duration) 
     }
   },
   mounted(){
@@ -59,39 +64,30 @@ export default {
 <style scoped>
 .container {
   position: relative;
-  padding: 0;
-  display: flex;
-    flex-direction: column;
-    gap: 40px;
+  list-style: none;
 }
-.test-img {
-    height: 300px;
-    object-fit: cover;
+.item-img {
+  height: 238px;
+  width: 160px;
+  object-fit: cover;
+  border-radius: 15px;
 }
 .item {
-  width: 100%;
-  height: 100px;
-  background-color: #f3f3f3;
-  border: 1px solid #666;
-  box-sizing: border-box;
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
-/* 1. declare transition */
 .fade-move,
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  opacity: 1;
 }
 
-/* 2. declare enter from and leave to state */
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-  transform: scaleY(0.01) translate(30px, 0);
+  transform:  translate(30px, 0);
 }
-
-/* 3. ensure leaving items are taken out of layout flow so that moving
-      animations can be calculated correctly. */
 .fade-leave-active {
   position: absolute;
 }

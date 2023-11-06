@@ -68,8 +68,18 @@
         <p>Marketplace</p>
       </h1>
     </div>
-    <testcarousel :imgs="imagesUrl"
-        :count="5"/>
+    <div class="image-carousel">
+      <testcarousel :imgs="imagesUrl"
+        :count="5"
+        :duration="1700"/>
+        <testcarousel :imgs="imagesUrl"
+        :count="5"
+        :duration="1500"/>
+        <testcarousel :imgs="imagesUrl"
+        :count="5"
+        :duration="1000"/>
+    </div>
+   
     
   </section>
 
@@ -178,6 +188,10 @@
 }
 .recipe-img__wrapper {
   height: 238px; 
+}
+
+.image-carousel{
+  display: flex;
 }
 
 
