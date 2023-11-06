@@ -30,11 +30,11 @@
                 for="">
                   <input 
                   v-model="searchRecipe" 
-                  @input="allRecipes"
+                  @input="searchAllRecipes"
                   type="text">
                 </label>
                 <ul class="recipes__list" v-for="recipe in searchedRecipe">
-                  <li>{{ recipe.meal }}</li>
+                  <!-- <li>{{ recipe.meal }}</li> -->
                 </ul>
                 <img 
                 class="search__icon"
@@ -78,12 +78,10 @@
 
 <script>
   import axios from "axios";
-  import ImageCarousel from './components/ImageCarousel.vue';
   import Testcarousel from './components/testcarousel.vue';
 
   export default {
     components: {
-    ImageCarousel,
     Testcarousel
 },
     data(){
@@ -99,7 +97,7 @@
       showSearchInput(){
         this.searchInputState = true;
       },
-      async allRecipes(){
+      async searchAllRecipes(){
         this.recipes = await axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=' + this.searchRecipe)
         .then(response => response.data)
         .then(response => {
@@ -127,18 +125,35 @@
           console.log(error)
         })
       },
+
+      async recipesImages(){
+        this.imgCarousel = await axios.get('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+        .then(response => response.data)
+        .then(response => {
+          if(!response.meals) return [];  
+            return response.meals
+            .map(meal => ({
+              thumb: meal.strMealThumb,
+            }))
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+      
     },
     async mounted(){
-      await this.allRecipes();
+      await this.searchAllRecipes();
+      await this.recipesImages();
+      
     },
     computed: {
       imagesUrl() {
-        const recipeImgs = Array.from(this.recipes.map(m => m.thumb).filter(src => !!src));
-        return recipeImgs;
+        return this.imgCarousel.map(m => m.thumb);
       },
       
       searchedRecipe(){
-        console.log(this.recipes)
+        console.log()
         return this.recipes.filter((recipe) => recipe.meal.toLowerCase().includes(this.searchRecipe.toLowerCase()))
       }
     }
