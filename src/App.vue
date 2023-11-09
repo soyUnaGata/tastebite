@@ -69,15 +69,18 @@
       </h1>
     </div>
     <div class="image-carousel">
-      <testcarousel :imgs="imagesUrl"
+      <testcarousel 
+        :imgs="imagesUrl"
+        :direction="'top'"
         :count="5"
-        :duration="1700"/>
+        :duration="2000"/>
+        <testcarousel :imgs="imagesUrlReverse"
+        :count="5"
+        :direction="'down'"
+        :duration="1800"/>
         <testcarousel :imgs="imagesUrl"
         :count="5"
         :duration="1500"/>
-        <testcarousel :imgs="imagesUrl"
-        :count="5"
-        :duration="1000"/>
     </div>
    
     
@@ -160,6 +163,11 @@
     computed: {
       imagesUrl() {
         return this.imgCarousel.map(m => m.thumb);
+      },
+
+      imagesUrlReverse(){
+        const reversedImgs = JSON.parse(JSON.stringify(this.imagesUrl));
+        return reversedImgs.reverse();
       },
       
       searchedRecipe(){

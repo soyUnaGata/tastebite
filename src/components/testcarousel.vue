@@ -1,5 +1,5 @@
 <template> 
-    <TransitionGroup tag="ul" name="fade" class="container" :key="imgs" :duration="duration">
+    <TransitionGroup tag="ul" name="fade" class="container" :key="imgs" :duration="duration" :direction="direction">
       <li v-for="img in viwedImages" class="item" :key="img">
         <img :src="img" alt="" class="item-img">
       </li>
@@ -23,40 +23,93 @@ export default {
     duration: {
       type: Number,
       default: 1000
+    },
+    direction:{
+      type: String,
+      required: true,
+      validator: value => ['top', 'down'].includes(value)
+      // default: this.render()
     }
 
   },
   data() {
     return {
       viwedImages: [],
-      index: 0,
+      viwedImagesDown: [],
+      indexTop: 0,
+      indexDown: 0,
       interval: null
     }
   },
   watch: {
     'imgs.length': function() {
+      if(this.direction === 'top' && this.imgs.length ){
       this.interval && clearInterval(this.interval);
       this.render();
+    }
+
+    if(this.direction === 'down' && this.imgs.length ){
+      this.intervalDown && clearInterval(this.intervalDown)
+      this.renderDown();
+    }
+      // this.interval && clearInterval(this.interval);
+      // this.render();
+      // this.intervalDown && clearInterval(this.intervalDown)
+      // this.renderDown();
     }
   },
   methods: {
     render() {
       this.viwedImages = this.imgs.slice(0, this.count);
-      this.index = this.count;
+      this.indexTop = this.count;
+
       this.interval = setInterval(() => {
-          let index = this.index % this.imgs.length;
-          this.index++;
+          let index = this.indexTop % this.imgs.length;
+          this.indexTop++;
           this.viwedImages.push(this.imgs[index]);
           this.viwedImages.shift();
           
       },this.duration) 
+    },
+
+    renderDown(){
+      this.viwedImages = this.imgs.slice(0, this.count);
+      this.indexDown = this.imgs.length -1;
+      console.log(this.index)
+
+      this.intervalDown = setInterval(() => {
+        this.viwedImages.unshift(this.imgs[this.indexDown]);
+        this.viwedImages.pop();
+        this.indexDown --;
+        if(this.indexDown < 0) {
+          this.indexDown = this.imgs.length -1;
+        }
+      },this.duration)
     }
   },
   mounted(){
-    if(this.imgs.length) this.render();
+    if(this.direction === 'top' && this.imgs.length ){
+       // if(this.imgs.length) this.render();
+       this.render();
+    }
+
+    if(this.direction === 'down' && this.imgs.length ){
+       // if(this.imgs.length) this.render();
+       this.renderDown();
+    }
+   
+    // if(this.imgs.length) this.renderDown();
   },
   unmounted() {
-    this.interval && clearInterval(this.interval);
+    if(this.direction === 'top' && this.imgs.length ){
+      this.interval && clearInterval(this.interval);
+    }
+
+    if(this.direction === 'down' && this.imgs.length ){
+      this.intervalDown && clearInterval(this.intervalDown)
+    }
+    // this.interval && clearInterval(this.interval);
+    // this.intervalDown && clearInterval(this.intervalDown)
   }
 }
 </script>
@@ -74,7 +127,7 @@ export default {
 }
 .item {
   opacity: 0;
-  transition: all 1s ease-in-out;
+  transition: all 2s ease-out;
 }
 
 .fade-move,
@@ -86,7 +139,7 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-  transform:  translate(30px, 0);
+  transform: translate(50px, 0);
 }
 .fade-leave-active {
   position: absolute;
