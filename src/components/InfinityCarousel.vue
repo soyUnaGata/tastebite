@@ -1,5 +1,5 @@
 <template>
-   <span v-if="mounted">I am mounted</span>
+   <!-- <span v-if="mounted">I am mounted</span> -->
   <transition-group name="fade" tag="ul" class="container" :class="[direction]" :duration="duration">
     <li v-for="img in viewed" :key="img" class="item"><img :src="img" class="item-img" alt=""></li>
   </transition-group>
@@ -35,14 +35,10 @@ export default {
   watch: {
     images: function () {
       if (this.images.length) {
-        this.intervalId;
-        clearInterval(this.intervalId)
+        this.viewed = this.images.slice(0, this.viewedCount);
+        this.index = this.viewedCount;
       }
-    },
-    // duration: function(newDuration){
-    //   clearInterval(this.intervalId);
-    //   this.intervalId = setInterval(newDuration);
-    // }
+    }
   },
   methods: {
     top() {
@@ -73,17 +69,14 @@ export default {
       default: throw new Error('Incorrect direction');
     }
 
-    if(this.images.length) this.intervalId = setInterval(func, this.duration);
+    this.intervalId = setInterval(func, this.duration);
 
     this.$nextTick(() => {
       if(this.viewed.length) this.intervalId;
     });
   },
   unmounted() {
-    clearInterval(this.intervalId)
-  },
-  beforeUnmount() {
-    clearInterval(this.intervalId);
+    this.intervalId && clearInterval(this.intervalId)
   }
   }
 

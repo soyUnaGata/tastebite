@@ -84,12 +84,12 @@
         <infinity-carousel
         :images="imagesUrl"
         :direction="'down'"
-        :duration="500"
+        :duration="1200"
         :viewed-count="4"/>
         <infinity-carousel
         :images="imagesUrl"
         :direction="'top'"
-        :duration="900"
+        :duration="950"
         :viewed-count="4"/>
     </div>
    
