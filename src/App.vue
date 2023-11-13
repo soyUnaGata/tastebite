@@ -69,12 +69,12 @@
       </h1>
     </div>
     <div class="image-carousel">
-      <!-- <testcarousel 
-        :imgs="imagesUrl"
-        :direction="'top'"
-        :count="5"
+      <testcarousel 
+        :images="imagesUrl"
+        :direction="'down'"
+        :viewedCount="5"
         :duration="2000"/>
-        <testcarousel :imgs="imagesUrlReverse"
+        <!-- <testcarousel :imgs="imagesUrlReverse"
         :count="5"
         :direction="'down'"
         :duration="1800"/>

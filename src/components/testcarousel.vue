@@ -1,22 +1,20 @@
-<template> 
-    <TransitionGroup tag="ul" name="fade" class="container" :key="imgs" :duration="duration" :direction="direction">
-      <li v-for="img in viwedImages" class="item" :key="img">
-        <img :src="img" alt="" class="item-img">
-      </li>
-    </TransitionGroup>
+<template>
+  <transition-group tag="ul" name="fade" class="container" :class="[direction]" :duration="duration" :direction="direction">
+    <li v-for="img in viewed" class="item" :key="img">
+      <img :src="img" alt="" class="item-img">
+    </li>
+  </transition-group>
 </template>
 
 <script>
 
-
-
-export default { 
-  props: { 
-    imgs: {
+export default {
+  props: {
+    images: {
       type: Array,
       required: true
     },
-    count: {
+    viewedCount: {
       type: Number,
       default: 0
     },
@@ -24,93 +22,59 @@ export default {
       type: Number,
       default: 1000
     },
-    direction:{
+    direction: {
       type: String,
       required: true,
-      validator: value => ['top', 'down'].includes(value)
-      // default: this.render()
+      validator: value => ['top', 'down'].includes(value),
+
     }
 
   },
   data() {
     return {
-      viwedImages: [],
-      viwedImagesDown: [],
-      indexTop: 0,
-      indexDown: 0,
-      interval: null
+      viewed: [],
+      index: 0,
+      intervalId: null,
     }
   },
   watch: {
-    'imgs.length': function() {
-      if(this.direction === 'top' && this.imgs.length ){
-      this.interval && clearInterval(this.interval);
-      this.render();
-    }
-
-    if(this.direction === 'down' && this.imgs.length ){
-      this.intervalDown && clearInterval(this.intervalDown)
-      this.renderDown();
-    }
-      // this.interval && clearInterval(this.interval);
-      // this.render();
-      // this.intervalDown && clearInterval(this.intervalDown)
-      // this.renderDown();
+    'images.length': function () {
+      if (this.images.length) {
+        clearInterval(this.intervalId);
+        this.render()
+      }
     }
   },
   methods: {
-    render() {
-      this.viwedImages = this.imgs.slice(0, this.count);
-      this.indexTop = this.count;
-
-      this.interval = setInterval(() => {
-          let index = this.indexTop % this.imgs.length;
-          this.indexTop++;
-          this.viwedImages.push(this.imgs[index]);
-          this.viwedImages.shift();
-          
-      },this.duration) 
+    top() {
+      this.index = this.index % this.images.length;
+      this.viewed.push(this.images[this.index]);
+      this.index++;
+      this.viewed.shift();
     },
-
-    renderDown(){
-      this.viwedImages = this.imgs.slice(0, this.count);
-      this.indexDown = this.imgs.length -1;
-      console.log(this.index)
-
-      this.intervalDown = setInterval(() => {
-        this.viwedImages.unshift(this.imgs[this.indexDown]);
-        this.viwedImages.pop();
-        this.indexDown --;
-        if(this.indexDown < 0) {
-          this.indexDown = this.imgs.length -1;
-        }
-      },this.duration)
+    down() {
+      this.viewed.unshift(this.images.at(this.index))
+      this.index--;
+      this.index = this.index % this.images.length;
+      this.viewed.pop();
+    },
+    render() {
+      this.viewed = this.images.slice(0, this.viewedCount);
+      this.index = this.viewedCount;
+      this.intervalId = setInterval(() => {
+        this.direction === 'top' ? this.top() : this.down();
+      }, this.duration);
     }
   },
-  mounted(){
-    if(this.direction === 'top' && this.imgs.length ){
-       // if(this.imgs.length) this.render();
-       this.render();
+  mounted() {
+    if (this.images.length) {
+      clearInterval(this.intervalId)
+      this.render();
     }
-
-    if(this.direction === 'down' && this.imgs.length ){
-       // if(this.imgs.length) this.render();
-       this.renderDown();
-    }
-   
-    // if(this.imgs.length) this.renderDown();
   },
   unmounted() {
-    if(this.direction === 'top' && this.imgs.length ){
-      this.interval && clearInterval(this.interval);
-    }
-
-    if(this.direction === 'down' && this.imgs.length ){
-      this.intervalDown && clearInterval(this.intervalDown)
-    }
-    // this.interval && clearInterval(this.interval);
-    // this.intervalDown && clearInterval(this.intervalDown)
-  }
+    this.interval && clearInterval(this.intervalId);
+  },
 }
 </script>
 
@@ -118,30 +82,41 @@ export default {
 .container {
   position: relative;
   list-style: none;
+  overflow: hidden;
 }
+
+.item {
+  opacity: 1;
+  transition: all 1s ease-in-out;
+}
+
 .item-img {
   height: 238px;
   width: 160px;
   object-fit: cover;
   border-radius: 15px;
 }
-.item {
+
+.top.fade-leave-to {
   opacity: 0;
-  transition: all 2s ease-out;
+  transform: translateY(-100%);
 }
 
-.fade-move,
-.fade-enter-active,
-.fade-leave-active {
-  opacity: 1;
+.top.fade-enter-from {
+  opacity: 0;
+  transform: translateY(100%);
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.down .fade-leave-to {
   opacity: 0;
-  transform: translate(50px, 0);
+  transform: translateY(100%);
 }
+
+.down .fade-enter-from {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
 .fade-leave-active {
   position: absolute;
-}
-</style>
+}</style>
