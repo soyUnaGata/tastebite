@@ -1,5 +1,5 @@
 <template>
-   <!-- <span v-if="mounted">I am mounted</span> -->
+
   <transition-group name="fade" tag="ul" class="container" :class="[direction]" :duration="duration">
     <li v-for="img in viewed" :key="img" class="item"><img :src="img" class="item-img" alt=""></li>
   </transition-group>
@@ -29,7 +29,6 @@ export default {
       viewed: [],
       index: 0,
       intervalId: null,
-      mounted: false
     }
   },
   watch: {
@@ -55,7 +54,6 @@ export default {
     }
   },
     mounted() {
-      this.mounted = true
       this.viewed = this.images.slice(0, this.viewedCount);
       this.index = this.viewedCount;
 

@@ -26,7 +26,6 @@ export default {
       type: String,
       required: true,
       validator: value => ['top', 'down'].includes(value),
-
     }
 
   },
@@ -95,14 +94,15 @@ export default {
   width: 160px;
   object-fit: cover;
   border-radius: 15px;
+  margin-top: 38px;
 }
 
-.top.fade-leave-to {
+.top .fade-leave-to {
   opacity: 0;
   transform: translateY(-100%);
 }
 
-.top.fade-enter-from {
+.top .fade-enter-from {
   opacity: 0;
   transform: translateY(100%);
 }
@@ -119,4 +119,5 @@ export default {
 
 .fade-leave-active {
   position: absolute;
-}</style>
+}
+</style>

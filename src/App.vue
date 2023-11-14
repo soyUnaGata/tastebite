@@ -69,26 +69,19 @@
       </h1>
     </div>
     <div class="image-carousel">
-      <testcarousel 
+      <infinity-slider-carousel
         :images="imagesUrl"
         :direction="'down'"
-        :viewedCount="5"
-        :duration="2000"/>
-        <!-- <testcarousel :imgs="imagesUrlReverse"
-        :count="5"
-        :direction="'down'"
-        :duration="1800"/>
-        <testcarousel :imgs="imagesUrl"
-        :count="5"
-        :duration="1500"/> -->
-        <infinity-carousel
-        :images="imagesUrl"
-        :direction="'down'"
-        :duration="1200"
-        :viewed-count="4"/>
-        <infinity-carousel
+        :viewed-count="5"
+        :duration="1200"/>
+        <infinity-slider-carousel
         :images="imagesUrl"
         :direction="'top'"
+        :duration="1000"
+        :viewed-count="4"/>
+        <infinity-slider-carousel
+        :images="imagesUrl"
+        :direction="'down'"
         :duration="950"
         :viewed-count="4"/>
     </div>
@@ -101,14 +94,14 @@
 
 <script>
   import axios from "axios";
-  import Testcarousel from './components/testcarousel.vue';
   import InfinityCarousel from "./components/InfinityCarousel.vue";
+  import InfinitySliderCarousel from "./components/InfinitySliderCarousel.vue";
 
   export default {
     components: {
-      Testcarousel,
-      InfinityCarousel
-    },
+    InfinityCarousel,
+    InfinitySliderCarousel
+},
     data(){
       return{
         apiKey: 'fbf234dd69a143dca2d87a54c359a1cb',
