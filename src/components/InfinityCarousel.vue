@@ -1,8 +1,23 @@
 <template>
-
-  <transition-group name="fade" tag="ul" class="container" :class="[direction]" :duration="duration">
-    <li v-for="img in viewed" :key="img" class="item"><img :src="img" class="item-img" alt=""></li>
-  </transition-group>
+    <transition-group
+        name="fade"
+        tag="ul"
+        class="container"
+        :class="[direction]"
+        :duration="duration"
+    >
+        <li
+            v-for="img in viewed"
+            :key="img"
+            class="item"
+        >
+            <img
+                :src="img"
+                class="item-img"
+                alt=""
+            >
+        </li>
+    </transition-group>
 </template>
 
 <script>
@@ -18,10 +33,11 @@ export default {
     },
     duration: {
       type: Number,
-      // default: 1000
+      default: 1000
     },
     direction: {
-      type: String
+      type: String,
+      default: null,
     }
   },
   data() {
@@ -37,20 +53,6 @@ export default {
         this.viewed = this.images.slice(0, this.viewedCount);
         this.index = this.viewedCount;
       }
-    }
-  },
-  methods: {
-    top() {
-      this.index = this.index % this.images.length;
-      this.viewed.push(this.images[this.index]);
-      this.index++;
-      this.viewed.shift();
-    },
-    down() {
-      this.viewed.unshift(this.images.at(this.index))
-      this.index--;
-      this.index = this.index % this.images.length;
-      this.viewed.pop();
     }
   },
     mounted() {
@@ -75,6 +77,20 @@ export default {
   },
   unmounted() {
     this.intervalId && clearInterval(this.intervalId)
+  },
+  methods: {
+    top() {
+      this.index = this.index % this.images.length;
+      this.viewed.push(this.images[this.index]);
+      this.index++;
+      this.viewed.shift();
+    },
+    down() {
+      this.viewed.unshift(this.images.at(this.index))
+      this.index--;
+      this.index = this.index % this.images.length;
+      this.viewed.pop();
+    }
   }
   }
 

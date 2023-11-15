@@ -1,9 +1,24 @@
 <template>
-  <transition-group tag="ul" name="fade" class="container" :class="[direction]" :duration="duration" :direction="direction">
-    <li v-for="img in viewed" class="item" :key="img">
-      <img :src="img" alt="" class="item-img">
-    </li>
-  </transition-group>
+    <transition-group
+        tag="ul"
+        name="fade"
+        class="container"
+        :class="[direction]"
+        :duration="duration"
+        :direction="direction"
+    >
+        <li
+            v-for="img in viewed"
+            class="item"
+            :key="img"
+        >
+            <img
+                :src="img"
+                alt=""
+                class="item-img"
+            >
+        </li>
+    </transition-group>
 </template>
 
 <script>
@@ -44,6 +59,15 @@ export default {
       }
     }
   },
+  mounted() {
+    if (this.images.length) {
+      clearInterval(this.intervalId)
+      this.render();
+    }
+  },
+  unmounted() {
+    this.interval && clearInterval(this.intervalId);
+  },
   methods: {
     top() {
       this.index = this.index % this.images.length;
@@ -64,15 +88,6 @@ export default {
         this.direction === 'top' ? this.top() : this.down();
       }, this.duration);
     }
-  },
-  mounted() {
-    if (this.images.length) {
-      clearInterval(this.intervalId)
-      this.render();
-    }
-  },
-  unmounted() {
-    this.interval && clearInterval(this.intervalId);
   },
 }
 </script>
