@@ -3,23 +3,7 @@
     <div
       class="header__inner d-flex justify-content-between align-items-center"
     >
-      <a class="logo" href="">
-        <div class="logo__block d-flex align-items-center">
-          <img src="./assets//img/logo.svg" class="logo__name" alt="" />
-          <svg
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            class="logo__dot"
-            viewBox="0 0 1024 1024"
-          >
-            <title />
-            <g id="icomoon-ignore" />
-            <path
-              d="M16 512c0 273.932 222.068 496 496 496s496-222.068 496-496v0c0-273.932-222.068-496-496-496s-496 222.068-496 496v0z"
-            />
-          </svg>
-        </div>
-      </a>
+      <logo-company/>
 
       <nav class="menu">
         <ul class="menu__list d-flex align-items-center">
@@ -39,26 +23,27 @@
       </nav>
 
       <div class="search d-flex">
-        <div class="search__wrapper">
-          <label class="search__input" v-show="searchInputState"
-for="">
-            <input @input="search" type="text" />
-          </label>
-          <ul
+        <div class="search__wrapper d-flex">
+         <div class="search__item d-flex align-items-center">
+            <label class="search__input" v-show="searchInputState" for="">
+              <input @input="search" type="text" />
+            </label>
+            <img
+              class="search__icon"
+              @click="showSearchInput"
+              src="./assets/img/search.svg"
+              alt=""
+            />
+         </div>
+          <ul v-if="searchRecipe"
             class="recipes__list"
             v-for="recipe in searchedRecipe"
             :key="recipe"
           >
-            <li v-if="searchRecipe">
+            <li>
               {{ recipe.meal }}
             </li>
           </ul>
-          <img
-            class="search__icon"
-            @click="showSearchInput"
-            src="./assets/img/search.svg"
-            alt=""
-          />
         </div>
 
         <li class="profile">
@@ -67,8 +52,8 @@ for="">
           </a>
         </li>
 
-        <div class="burger-menu__mobile">
-          <div class="burger-menu__about" />
+        <div class="burger-menu__mobile d-none">
+          <div class="burger-menu__about"></div>
         </div>
       </div>
     </div>
@@ -78,9 +63,7 @@ for="">
     <div class="headline">
       <h1>
         Recipe
-        <p>
-Marketplace
-</p>
+        <p>Marketplace</p>
       </h1>
     </div>
     <!-- <div class="image-carousel">
@@ -107,12 +90,14 @@ Marketplace
 </template>
 
 <script>
-import axios from 'axios';
-import debounce from 'lodash.debounce';
-import InfinitySliderCarousel from './components/InfinitySliderCarousel.vue';
+import axios from "axios";
+import debounce from "lodash.debounce";
+import LogoCompany from "./components/shared/LogoCompany.vue";
+import InfinitySliderCarousel from "./components/InfinitySliderCarousel.vue";
 
 export default {
   components: {
+    LogoCompany,
     InfinitySliderCarousel,
   },
   data() {
@@ -120,7 +105,7 @@ export default {
       recipes: [],
       imgCarousel: [],
       searchInputState: false,
-      searchRecipe: '',
+      searchRecipe: "",
     };
   },
   computed: {
@@ -201,16 +186,25 @@ export default {
 
 <style>
 .header__inner {
-  padding: 30px 15px;
+  padding: 30px 25px;
   width: 100%;
 }
-.logo__name {
-  max-width: 150px;
+
+.menu__list {
+  gap: 25px;
 }
 
-.logo__dot {
-  height: 10px;
-  fill: #ff642f;
+.search {
+  gap: 15px;
+}
+
+.search__wrapper {
+  gap: 7px;
+}
+
+.search__item {
+  cursor: pointer;
+  gap: 7px;
 }
 
 .main {

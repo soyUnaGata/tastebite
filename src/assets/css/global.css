@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.d-none {
+  display: none;
+}
+
 .flex-row {
   flex-direction: row;
 }
