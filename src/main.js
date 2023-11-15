@@ -4,6 +4,6 @@ import router from './router';
 import store from './store';
 import '@/assets/css/main.css';
 import '@/assets/css/global.css';
+import '@/assets/css/variables.css';
 
-
-createApp(App).use(store).use(router).mount('#app')
+createApp(App).use(store).use(router).mount('#app');

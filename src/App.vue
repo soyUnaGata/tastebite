@@ -4,7 +4,21 @@
       class="header__inner d-flex justify-content-between align-items-center"
     >
       <a class="logo" href="">
-        <!-- <img class="logo-img" src="./assets/img/logo.svg" alt="logo"> -->
+        <div class="logo__block d-flex align-items-center">
+          <img src="./assets//img/logo.svg" class="logo__name" alt="" />
+          <svg
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            class="logo__dot"
+            viewBox="0 0 1024 1024"
+          >
+            <title />
+            <g id="icomoon-ignore" />
+            <path
+              d="M16 512c0 273.932 222.068 496 496 496s496-222.068 496-496v0c0-273.932-222.068-496-496-496s-496 222.068-496 496v0z"
+            />
+          </svg>
+        </div>
       </a>
 
       <nav class="menu">
@@ -26,7 +40,8 @@
 
       <div class="search d-flex">
         <div class="search__wrapper">
-          <label class="search__input" v-show="searchInputState" for="">
+          <label class="search__input" v-show="searchInputState"
+for="">
             <input @input="search" type="text" />
           </label>
           <ul
@@ -47,7 +62,9 @@
         </div>
 
         <li class="profile">
-          <a class="profile-link" href="" />
+          <a class="profile-link" href="">
+            <img class="account__icon" src="./assets/img/account.svg" alt="" />
+          </a>
         </li>
 
         <div class="burger-menu__mobile">
@@ -61,10 +78,12 @@
     <div class="headline">
       <h1>
         Recipe
-        <p>Marketplace</p>
+        <p>
+Marketplace
+</p>
       </h1>
     </div>
-    <div class="image-carousel">
+    <!-- <div class="image-carousel">
       <infinity-slider-carousel
         :images="imagesUrl"
         :direction="'down'"
@@ -83,14 +102,14 @@
         :duration="950"
         :viewed-count="4"
       />
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import debounce from "lodash.debounce";
-import InfinitySliderCarousel from "./components/InfinitySliderCarousel.vue";
+import axios from 'axios';
+import debounce from 'lodash.debounce';
+import InfinitySliderCarousel from './components/InfinitySliderCarousel.vue';
 
 export default {
   components: {
@@ -101,7 +120,7 @@ export default {
       recipes: [],
       imgCarousel: [],
       searchInputState: false,
-      searchRecipe: "",
+      searchRecipe: '',
     };
   },
   computed: {
@@ -175,19 +194,23 @@ export default {
     search: debounce(async function (e) {
       this.searchRecipe = e.target.value;
       await this.searchAllRecipes();
-    }, 700),
+    }, 500),
   },
 };
 </script>
 
 <style>
-.logo {
-  width: 100px;
+.header__inner {
+  padding: 30px 15px;
+  width: 100%;
 }
-.logo-img {
-  width: 150px;
-  height: 250px;
-  object-fit: contain;
+.logo__name {
+  max-width: 150px;
+}
+
+.logo__dot {
+  height: 10px;
+  fill: #ff642f;
 }
 
 .main {
