@@ -125,7 +125,7 @@ export default {
   },
   methods: {
     showSearchInput() {
-      this.searchInputState = true;
+      this.searchInputState = !this.searchInputState;
     },
 
     async searchAllRecipes() {
