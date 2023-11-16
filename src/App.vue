@@ -26,7 +26,10 @@
         <div class="search__wrapper d-flex">
          <div class="search__item d-flex align-items-center">
             <label class="search__input" v-show="searchInputState" for="">
-              <input  class="search__input-item" @input="search" type="text" />
+              <input  class="search__input-item" 
+              @input="search" 
+              type="text" 
+              @keyup.enter="getAllRecipesByName"/>
             </label>
             <img
               class="search__icon"
@@ -37,16 +40,14 @@
          </div>
         
          <div class="recipes__searched-list d-flex flex-column"
-          > //v-if="!searchRecipe"
+          > !--- v-if="!searchRecipe" ---!
           <ul
             class="recipes__list d-flex align-items-center"
             v-for="recipe in searchedRecipe"
             :key="recipe"
           >
-          <img class="recipes__items-image" :src="recipe.thumb" alt="">
-            <li class="recipes__items">
-              {{ recipe.meal }}
-            </li>
+            <img class="recipes__items-image" :src="recipe.thumb" alt="">
+            <li class="recipes__items">{{ recipe.meal }}</li>
           </ul>
          </div>
         </div>
@@ -92,6 +93,10 @@
       />
     </div> -->
   </div>
+
+  <div class="categories">
+    {{ recipesByName }}
+  </div>
 </template>
 
 <script>
@@ -111,6 +116,7 @@ export default {
       imgCarousel: [],
       searchInputState: false,
       searchRecipe: "",
+      recipesByName: [],
     };
   },
   computed: {
@@ -185,6 +191,10 @@ export default {
       this.searchRecipe = e.target.value;
       await this.searchAllRecipes();
     }, 500),
+
+    getAllRecipesByName(){
+      return this.recipesByName = JSON.parse(JSON.stringify(this.searchedRecipe));
+    }
   },
 };
 </script>
