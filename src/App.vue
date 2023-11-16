@@ -26,7 +26,7 @@
         <div class="search__wrapper d-flex">
          <div class="search__item d-flex align-items-center">
             <label class="search__input" v-show="searchInputState" for="">
-              <input @input="search" type="text" />
+              <input  class="search__input-item" @input="search" type="text" />
             </label>
             <img
               class="search__icon"
@@ -35,15 +35,20 @@
               alt=""
             />
          </div>
-          <ul v-if="searchRecipe"
-            class="recipes__list"
+        
+         <div class="recipes__searched-list d-flex flex-column"
+          > //v-if="!searchRecipe"
+          <ul
+            class="recipes__list d-flex align-items-center"
             v-for="recipe in searchedRecipe"
             :key="recipe"
           >
-            <li>
+          <img class="recipes__items-image" :src="recipe.thumb" alt="">
+            <li class="recipes__items">
               {{ recipe.meal }}
             </li>
           </ul>
+         </div>
         </div>
 
         <li class="profile">
@@ -190,8 +195,14 @@ export default {
   width: 100%;
 }
 
+.menu__list-link {
+  font-size: 18px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
 .menu__list {
-  gap: 25px;
+  gap: 30px;
 }
 
 .search {
@@ -200,11 +211,20 @@ export default {
 
 .search__wrapper {
   gap: 7px;
+  position: relative;
 }
 
 .search__item {
   cursor: pointer;
   gap: 7px;
+}
+
+.search__input-item{
+  width: 450px;
+}
+
+.search__icon,.account__icon {
+  width: 30px;
 }
 
 .main {
@@ -213,10 +233,36 @@ export default {
   height: 650px;
   overflow: hidden;
 }
+
+.recipes__searched-list {
+  position: absolute;
+  transform: translateY(15%);
+  width: 450px;
+  height: 350px;
+  overflow-y: scroll;
+  gap: 15px;
+  z-index: var(--for-search-list);
+}
+
 .recipe-img__wrapper {
   height: 238px;
 }
 
+.recipes__list {
+  gap: 15px;
+  cursor: pointer;
+}
+
+.recipes__items-image {
+  width: 66px;
+  height: 55px;
+  object-fit: cover;
+}
+
+.recipes__items {
+  font-size: 18px;
+  color: var(--primary);
+}
 .image-carousel {
   display: flex;
 }
