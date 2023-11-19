@@ -1,0 +1,45 @@
+<template>
+    <page-header/>
+
+    <div class="main container">
+    <div class="headline">
+      <h1>
+        Recipe
+        <p>Marketplace</p>
+      </h1>
+    </div>
+    <!-- <div class="image-carousel">
+      <infinity-slider-carousel
+        :images="imagesUrl"
+        :direction="'down'"
+        :viewed-count="5"
+        :duration="1200"
+      />
+      <infinity-slider-carousel
+        :images="imagesUrl"
+        :direction="'top'"
+        :duration="1000"
+        :viewed-count="4"
+      />
+      <infinity-slider-carousel
+        :images="imagesUrl"
+        :direction="'down'"
+        :duration="950"
+        :viewed-count="4"
+      />
+    </div> -->
+  </div>
+
+</template>
+
+<script>
+import PageHeader from '@/components/shared/PageHeader.vue';
+import InfinitySliderCarousel from '@/components/InfinitySliderCarousel.vue';
+
+export default({
+    components: {
+        PageHeader,
+        InfinitySliderCarousel
+    }
+})
+</script>

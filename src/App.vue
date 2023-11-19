@@ -1,74 +1,12 @@
 <template>
-  <div class="container d-flex">
-    <div
-      class="header__inner d-flex justify-content-between align-items-center"
-    >
-      <logo-company/>
-
-      <nav class="menu">
-        <ul class="menu__list d-flex align-items-center">
-          <li class="menu__list-item">
-            <a class="menu__list-link" href="">Homepage</a>
-          </li>
-          <li class="menu__list-item">
-            <a class="menu__list-link" href="">Reciepe Page</a>
-          </li>
-          <li class="menu__list-item">
-            <a class="menu__list-link" href="">Pages</a>
-          </li>
-          <li class="menu__list-item">
-            <a class="menu__list-link" href="">Buy</a>
-          </li>
-        </ul>
-      </nav>
-
-      <div class="search d-flex">
-        <div class="search__wrapper d-flex">
-         <div class="search__item d-flex align-items-center">
-            <label class="search__input" v-show="searchInputState" for="">
-              <input  class="search__input-item" 
-              @input="search" 
-              type="text" 
-              @keyup.enter="getAllRecipesByName"/>
-            </label>
-            <img
-              class="search__icon"
-              @click="showSearchInput"
-              src="./assets/img/search.svg"
-              alt=""
-            />
-         </div>
-        
-         <div class="recipes__searched-list d-flex flex-column"
-          > !--- v-if="!searchRecipe" ---!
-          <ul
-            class="recipes__list d-flex align-items-center"
-            v-for="recipe in searchedRecipe"
-            :key="recipe"
-          >
-            <img class="recipes__items-image" :src="recipe.thumb" alt="">
-            <li class="recipes__items">{{ recipe.meal }}</li>
-          </ul>
-         </div>
-        </div>
-
-        <li class="profile">
-          <a class="profile-link" href="">
-            <img class="account__icon" src="./assets/img/account.svg" alt="" />
-          </a>
-        </li>
-
-        <div class="burger-menu__mobile d-none">
-          <div class="burger-menu__about"></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="main container">
     <div class="headline">
       <h1>
         Recipe
+
+        <router-link to="/recipes/11">It's link</router-link>
+
         <p>Marketplace</p>
       </h1>
     </div>
@@ -96,22 +34,29 @@
 
   <div class="recipes__list-filterd container">
     <div class="recipe__card d-flex flex-column" v-for="meal in recipesByName">
+
+      <router-link :to="`/recipes/${meal.id}`">
       <img class="recipe__img" :src="meal.thumb" alt="">
-      <div class="recipe__about d-flex flex-column">
-        <p class="recipe__category">{{ meal.category }},
-        <span class="recipe__area">{{ meal.area }}</span>
-        </p>
-        <h3 class="recipe__headline">{{ meal.meal }}</h3>
-      </div>
+        <div class="recipe__about d-flex flex-column">
+          <p class="recipe__category">{{ meal.category }},
+          <span class="recipe__area">{{ meal.area }}</span>
+          </p>
+          <h3 class="recipe__headline">{{ meal.meal }}</h3>
+        </div>
+      </router-link>
     </div>
   </div>
+
+ 
 </template>
 
 <script>
+import { RouterView } from "vue-router";
 import axios from "axios";
 import debounce from "lodash.debounce";
 import LogoCompany from "./components/shared/LogoCompany.vue";
 import InfinitySliderCarousel from "./components/InfinitySliderCarousel.vue";
+
 
 export default {
   components: {
