@@ -5,7 +5,7 @@
                 <label class="search__input" v-show="searchInputState" for="">
                     <input class="search__input-item" @input="search" type="text" @keyup.enter="getAllRecipesByName" />
                 </label>
-                <img class="search__icon" @click="showSearchInput" src="/src/assets/img/search.svg" alt="" />
+                <img class="search__icon" @click="showSearchInput" src="@/assets/img/search.svg" alt="" />
             </div>
 
             <div class="recipes__searched-list d-flex flex-column"> !--- v-if="!searchRecipe" ---!
@@ -19,7 +19,18 @@
 </template>
 
 <script>
-
+    export default ({
+        data(){
+            return {
+                searchInputState: false,
+            }
+        },
+        methods: {
+            showSearchInput() {
+                this.searchInputState = !this.searchInputState;
+            },
+        }
+    })
 </script>
 
 <style scoped>

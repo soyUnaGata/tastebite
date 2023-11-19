@@ -8,7 +8,7 @@
         <p>Marketplace</p>
       </h1>
     </div>
-    <!-- <div class="image-carousel">
+    <div class="image-carousel">
       <infinity-slider-carousel
         :images="imagesUrl"
         :direction="'down'"
@@ -27,7 +27,7 @@
         :duration="950"
         :viewed-count="4"
       />
-    </div> -->
+    </div>
   </div>
   <recipes-list-category/>
 </template>
@@ -36,13 +36,29 @@
 import PageHeader from '@/components/shared/PageHeader.vue';
 import InfinitySliderCarousel from '@/components/InfinitySliderCarousel.vue';
 import RecipesListCategory from '@/components/RecipesListCategory.vue'
+import ImagesService from '@/services/images-service';
 
 export default({
     components: {
         PageHeader,
         InfinitySliderCarousel,
         RecipesListCategory
-    }
+    },
+    data(){
+        return {
+            imagesUrl: [],
+        }
+    },
+    computed:{},
+    methods:{
+        async loadImages(){
+            const response = await ImagesService.getAllImages();
+            this.imagesUrl =  response.map((meal) => meal.thumb);
+        }
+    },
+    async mounted(){
+        await this.loadImages();
+    },
 })
 </script>
 

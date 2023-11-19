@@ -25,7 +25,7 @@
             <div class="profile__section">
                 <li class="profile">
                 <a class="profile-link" href="">
-                    <img class="account__icon" src="/src/assets/img/account.svg" alt="" />
+                    <img class="account__icon" src="@/assets/img/account.svg" alt="" />
                 </a>
                 </li>
 
