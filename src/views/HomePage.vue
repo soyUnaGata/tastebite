@@ -29,17 +29,19 @@
       />
     </div> -->
   </div>
-
+  <recipes-list-category/>
 </template>
 
 <script>
 import PageHeader from '@/components/shared/PageHeader.vue';
 import InfinitySliderCarousel from '@/components/InfinitySliderCarousel.vue';
+import RecipesListCategory from '@/components/RecipesListCategory.vue'
 
 export default({
     components: {
         PageHeader,
-        InfinitySliderCarousel
+        InfinitySliderCarousel,
+        RecipesListCategory
     }
 })
 </script>

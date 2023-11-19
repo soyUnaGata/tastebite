@@ -1,12 +1,18 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-
+import { createRouter, createWebHistory } from 'vue-router';
+import HomePage from '../views/HomePage.vue'
+import RecipeItemDetails from '../views/RecipeItemDetails.vue'
 
 
 const routes = [
   {
-    // path: '/',
-    // name: 'home',
-    // component: 
+    path: '/home',
+    name: 'main',
+    component: HomePage
+  },
+  {
+    path: '/recipes/:id',
+    name: 'recipe-details',
+    component: RecipeItemDetails
   },
   {
     // path: '/about',
@@ -21,7 +27,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(process.env.BASE_URL),
+  history: createWebHistory(process.env.BASE_URL),
   routes
 })
 

@@ -1,68 +1,14 @@
 <template>
-
-  <div class="main container">
-    <div class="headline">
-      <h1>
-        Recipe
-
-        <router-link to="/recipes/11">It's link</router-link>
-
-        <p>Marketplace</p>
-      </h1>
-    </div>
-    <!-- <div class="image-carousel">
-      <infinity-slider-carousel
-        :images="imagesUrl"
-        :direction="'down'"
-        :viewed-count="5"
-        :duration="1200"
-      />
-      <infinity-slider-carousel
-        :images="imagesUrl"
-        :direction="'top'"
-        :duration="1000"
-        :viewed-count="4"
-      />
-      <infinity-slider-carousel
-        :images="imagesUrl"
-        :direction="'down'"
-        :duration="950"
-        :viewed-count="4"
-      />
-    </div> -->
-  </div>
-
-  <div class="recipes__list-filterd container">
-    <div class="recipe__card d-flex flex-column" v-for="meal in recipesByName">
-
-      <router-link :to="`/recipes/${meal.id}`">
-      <img class="recipe__img" :src="meal.thumb" alt="">
-        <div class="recipe__about d-flex flex-column">
-          <p class="recipe__category">{{ meal.category }},
-          <span class="recipe__area">{{ meal.area }}</span>
-          </p>
-          <h3 class="recipe__headline">{{ meal.meal }}</h3>
-        </div>
-      </router-link>
-    </div>
-  </div>
-
- 
+  <RouterView/>
 </template>
 
 <script>
 import { RouterView } from "vue-router";
-import axios from "axios";
 import debounce from "lodash.debounce";
-import LogoCompany from "./components/shared/LogoCompany.vue";
-import InfinitySliderCarousel from "./components/InfinitySliderCarousel.vue";
+
 
 
 export default {
-  components: {
-    LogoCompany,
-    InfinitySliderCarousel,
-  },
   data() {
     return {
       recipes: [],
