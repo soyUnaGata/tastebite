@@ -21,3 +21,52 @@
 <script>
 
 </script>
+
+<style scoped>
+.search {
+  gap: 15px;
+}
+.search__wrapper {
+  gap: 7px;
+  position: relative;
+}
+.search__item {
+  cursor: pointer;
+  gap: 7px;
+}
+.search__input-item{
+  width: 450px;
+}
+.search__icon {
+  width: 30px;
+}
+.recipes__searched-list {
+  position: absolute;
+  transform: translateY(15%);
+  width: 450px;
+  height: 350px;
+  overflow-y: scroll;
+  gap: 15px;
+  z-index: var(--for-search-list);
+}
+
+.recipe-img__wrapper {
+  height: 238px;
+}
+
+.recipes__list {
+  gap: 15px;
+  cursor: pointer;
+}
+
+.recipes__items-image {
+  width: 66px;
+  height: 55px;
+  object-fit: cover;
+}
+
+.recipes__items {
+  font-size: 18px;
+  color: var(--primary);
+}
+</style>

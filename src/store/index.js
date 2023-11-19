@@ -1,10 +1,8 @@
 import { createStore } from 'vuex';
-import { searchRecipes } from './search-recipes';
+import searchRecipes from './search-recipes.js';
 
 const store = createStore({
-    modules: {
-        searchRecipes,
-    },
+    searchRecipes,
 });
 
 export default store;

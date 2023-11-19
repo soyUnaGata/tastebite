@@ -49,3 +49,29 @@
         }
     })
 </script>
+
+<style scoped>
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.header__inner {
+  padding: 30px 0px;
+  width: 100%;
+}
+
+.menu__list-link {
+  font-size: 18px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.menu__list {
+  gap: 30px;
+}
+
+.account__icon {
+  width: 30px;
+}
+</style>

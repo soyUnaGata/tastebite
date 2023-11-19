@@ -38,9 +38,3 @@ export default {
   },
 }
 
-export const searchRecipes = {
-  state,
-  getters,
-  actions,
-  mutations,
-};

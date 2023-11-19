@@ -5,7 +5,7 @@ import RecipeItemDetails from '../views/RecipeItemDetails.vue'
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'main',
     component: HomePage
   },

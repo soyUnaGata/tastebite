@@ -20,4 +20,38 @@ export default({
 })
 </script>
 
-<style></style>
+<style scoped>
+.recipes__list-filterd {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 30px;
+}
+.recipe__card {
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  align-self: start;
+  height: 360px;
+  width: 300px;
+  cursor: pointer;
+}
+
+.recipe__img {
+  max-width: 100%;
+  object-fit: cover;
+  height: 260px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+.recipe__about {
+  gap: 10px;
+  padding: 15px;
+}
+.recipe__category {
+}
+.recipe__area {
+}
+.recipe__headline {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+</style>

@@ -45,3 +45,20 @@ export default({
     }
 })
 </script>
+
+<style scoped>
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.main {
+  display: flex;
+  justify-content: space-between;
+  height: 650px;
+  overflow: hidden;
+}
+.image-carousel {
+  display: flex;
+  gap: 35px;
+}
+</style>
