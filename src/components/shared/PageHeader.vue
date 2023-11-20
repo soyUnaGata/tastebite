@@ -20,7 +20,7 @@
                 </ul>
             </nav>
             
-            <search-bar/>
+            <!-- <search-bar/> -->
 
             <div class="profile__section">
                 <li class="profile">

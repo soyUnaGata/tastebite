@@ -1,6 +1,11 @@
 <template>
+    <div class="header__wrapper">
+        <page-header/>
+        <search-bar/>
+    </div>
+
     <div class="recipes__list-filterd container">
-        <div class="recipe__card d-flex flex-column" v-for="meal in recipesByName">
+        <div class="recipe__card d-flex flex-column" v-for="meal in searchedRecipe">
         <img class="recipe__img" :src="meal.thumb" alt="">
             <div class="recipe__about d-flex flex-column">
             <p class="recipe__category">{{ meal.category }},
@@ -13,10 +18,18 @@
 </template>
 
 <script>
-
+import PageHeader from '@/components/shared/PageHeader.vue';
+import SearchBar from '@/components/shared/SearchBar.vue';
 export default({
-
- 
+  components:{
+    PageHeader,
+    SearchBar
+  },
+  computed:{
+    searchedRecipe(){
+      return this.$store.getters.uptadetRecipes;
+    },
+  },
 })
 </script>
 

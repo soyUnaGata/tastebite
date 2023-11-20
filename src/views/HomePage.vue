@@ -1,5 +1,9 @@
 <template>
-    <page-header/>
+    <div class="header__wrapper">
+        <page-header/>
+        <search-bar/>
+    </div>
+    
 
     <div class="main container">
     <div class="headline">
@@ -8,7 +12,7 @@
         <p>Marketplace</p>
       </h1>
     </div>
-    <div class="image-carousel">
+    <!-- <div class="image-carousel">
       <infinity-slider-carousel
         :images="imagesUrl"
         :direction="'down'"
@@ -27,22 +31,22 @@
         :duration="950"
         :viewed-count="4"
       />
-    </div>
+    </div> -->
   </div>
-  <recipes-list-category/>
+
 </template>
 
 <script>
 import PageHeader from '@/components/shared/PageHeader.vue';
 import InfinitySliderCarousel from '@/components/InfinitySliderCarousel.vue';
-import RecipesListCategory from '@/components/RecipesListCategory.vue'
 import ImagesService from '@/services/images-service';
+import SearchBar from '@/components/shared/SearchBar.vue';
 
 export default({
     components: {
         PageHeader,
         InfinitySliderCarousel,
-        RecipesListCategory
+        SearchBar
     },
     data(){
         return {
