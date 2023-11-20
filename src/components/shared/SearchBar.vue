@@ -24,31 +24,32 @@ import debounce from "lodash.debounce";
     export default ({
         data(){
             return {
-                searchInputState: false,
+              searchInputState: false,
             }
         },
         computed:{
             searchedRecipe(){
-                return this.$store.getters.allSearchRecipes;
+              return this.$store.getters.allSearchRecipes;
             }
         },
         methods: {
             showSearchInput() {
-                this.searchInputState = !this.searchInputState;
+              this.searchInputState = !this.searchInputState;
             },
             search: debounce(async function ({target}) {
-                this.$store.dispatch('updateValue', target.value);
-                await this.$store.dispatch('fetchAllSearchRecources');
+              this.$store.dispatch('updateValue', target.value);
+              await this.$store.dispatch('fetchAllSearchRecources');
             
             }, 500),
 
             complete(){
-                this.$store.dispatch('updateSearchedList');
-                this.$router.push({name: 'recipe-searched-list'})
+              this.$store.dispatch('updateSearchedList');
+              this.searchInputState = false;
+              this.$router.push({name: 'recipe-searched-list'});
             }
         },
         async mounted(){
-            if(!this.$store.getters.allSearchRecipes) await this.$store.dispatch('fetchAllSearchRecources');
+           if(!this.$store.getters.allSearchRecipes) await this.$store.dispatch('fetchAllSearchRecources');
         }
     })
 </script>

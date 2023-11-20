@@ -43,9 +43,10 @@ export default({
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   align-self: start;
-  height: 360px;
+  /* height: 360px; */
   width: 300px;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .recipe__img {
@@ -64,7 +65,15 @@ export default({
 .recipe__area {
 }
 .recipe__headline {
-  text-overflow: ellipsis;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recipe__headline:hover{
+  white-space: normal;
+  overflow: visible;
+  text-overflow: initial;
+  padding-bottom: 10px;
 }
 </style>
