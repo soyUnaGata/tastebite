@@ -1,7 +1,7 @@
 import api from './api';
 
 class SearchService {
-    async search(){
+    async search(value){
         return await api.get(`search.php?s=${value}`)
         .then((response) => response.data)
         .then((response) => {

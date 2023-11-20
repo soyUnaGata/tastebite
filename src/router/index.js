@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomePage from '../views/HomePage.vue'
+import HomePage from '../views/HomePage.vue';
+import RecipesSearchedList from '../components/RecipesSerchedList.vue';
 import RecipeItemDetails from '../views/RecipeItemDetails.vue'
 
 
@@ -8,6 +9,11 @@ const routes = [
     path: '/',
     name: 'main',
     component: HomePage
+  },
+  {
+    path: '/recipes/results',
+    name: 'recipe-searched-list',
+    component: RecipesSearchedList
   },
   {
     path: '/recipes/:id',

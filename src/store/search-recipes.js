@@ -3,12 +3,14 @@ import SearchService from '@/services/search-service';
 export default {
   state: {
     searchRecipes: [],
+    updatedsearchRecipes: [],
     value: '',
   },
 
   getters: {
     value: (state) => state.value,
-    allsearchRecipes: (state) => state.searchRecipes
+    allSearchRecipes: (state) => state.searchRecipes,
+    uptadetRecipes: (state) => state.updatedsearchRecipes,
   },
 
   mutations: {
@@ -18,6 +20,10 @@ export default {
 
     SET_VALUE: (state, value) => {
       state.value = value;
+    },
+
+    SET_NEW_RECIPE_LIST: (state, searchRecipes) => {
+      state.updatedsearchRecipes = Object.assign([], searchRecipes);
     }
   },
 
@@ -34,6 +40,12 @@ export default {
 
     updateValue({commit}, value){
       commit('SET_VALUE', value);
+    },
+
+    updateSearchedList({commit, state}){
+      if(state.searchRecipes.length){
+        commit('SET_NEW_RECIPE_LIST', state.searchRecipes)
+      }
     }
   },
 }
