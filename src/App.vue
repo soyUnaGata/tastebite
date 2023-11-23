@@ -1,105 +1,119 @@
 <template>
-  <RouterView/>
+  <!-- <RouterView/> -->
+  <div class="header__wrapper d-flex">
+    <page-header />
+    <search-bar @list-of-meals="getListOfMeals"/>
+  </div>
+
+
+  <div class="main container">
+    <div class="headline">
+      <h1>
+        Recipe
+        <p>Marketplace</p>
+      </h1>
+    </div>
+    <!-- <div class="image-carousel">
+      <infinity-slider-carousel
+        :images="imagesUrl"
+        :direction="'down'"
+        :viewed-count="5"
+        :duration="1200"
+      />
+      <infinity-slider-carousel
+        :images="imagesUrl"
+        :direction="'top'"
+        :duration="1000"
+        :viewed-count="4"
+      />
+      <infinity-slider-carousel
+        :images="imagesUrl"
+        :direction="'down'"
+        :duration="950"
+        :viewed-count="4"
+      />
+    </div> -->
+  </div>
+
+  <details v-if="details" :meal="meal" />
+  <meals-list v-else :meals="meals" />
 </template>
 
 <script>
-import { RouterView } from "vue-router";
+// import { RouterView } from "vue-router";
 import debounce from "lodash.debounce";
+import PageHeader from '@/components/shared/PageHeader.vue';
+import InfinitySliderCarousel from '@/components/InfinitySliderCarousel.vue';
+import ImagesService from '@/services/images-service';
+import SearchBar from '@/components/shared/SearchBar.vue';
+import MealsList from '@/components/MealsList.vue';
+import SearchService from "@/services/search-service.js";
 
 
 
 export default {
-  // data() {
-  //   return {
-  //     recipes: [],
-  //     imgCarousel: [],
-  //     searchInputState: false,
-  //     searchRecipe: "",
-  //     recipesByName: [],
-  //   };
-  // },
-  // computed: {
-  //   imagesUrl() {
-  //     return this.imgCarousel.map((m) => m.thumb);
-  //   },
-  //   searchedRecipe() {
-  //     console.log(this.recipes);
-  //     return this.recipes.filter((recipe) =>
-  //       recipe.meal.toLowerCase().includes(this.searchRecipe.toLowerCase())
-  //     );
-  //   },
-  // },
-  // async mounted() {
-  //   await this.searchAllRecipes();
-  //   await this.recipesImages();
-  // },
-  // methods: {
-  //   showSearchInput() {
-  //     this.searchInputState = !this.searchInputState;
-  //   },
-
-  //   async searchAllRecipes() {
-  //     this.recipes = await axios
-  //       .get(
-  //         "https://www.themealdb.com/api/json/v1/1/search.php?s=" +
-  //           this.searchRecipe
-  //       )
-  //       .then((response) => response.data)
-  //       .then((response) => {
-  //         if (!response.meals) return [];
-  //         return response.meals.map((meal) => ({
-  //           id: meal.idMeal,
-  //           meal: meal.strMeal,
-  //           drinkAlternate: meal.strDrinkAlternate,
-  //           category: meal.strCategory,
-  //           area: meal.strArea,
-  //           instructions: meal.strInstructions,
-  //           thumb: meal.strMealThumb,
-  //           youtube: meal.strYoutube,
-  //           ingredients: Object.keys(meal)
-  //             .filter((p) => p.includes("Ingredient"))
-  //             .map((p) => meal[p]),
-  //           measures: Object.keys(meal)
-  //             .filter((p) => p.includes("Measure"))
-  //             .map((p) => meal[p]),
-  //           source: meal.strSource,
-  //           imageSource: meal.strImageSource,
-  //         }));
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   },
-
-  //   async recipesImages() {
-  //     this.imgCarousel = await axios
-  //       .get("https://www.themealdb.com/api/json/v1/1/search.php?s=")
-  //       .then((response) => response.data)
-  //       .then((response) => {
-  //         if (!response.meals) return [];
-  //         return response.meals.map((meal) => ({
-  //           thumb: meal.strMealThumb,
-  //         }));
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   },
-
-  //   search: debounce(async function (e) {
-  //     this.searchRecipe = e.target.value;
-  //     await this.searchAllRecipes();
-  //   }, 500),
-
-  //   getAllRecipesByName(){
-  //     return this.recipesByName = JSON.parse(JSON.stringify(this.searchedRecipe));
+  components: {
+    PageHeader,
+    InfinitySliderCarousel,
+    SearchBar,
+    MealsList
+  },
+  data() {
+    return {
+      detailed: false,
+      meal: {},
+      meals: [],
+      imagesUrl: [],
+      query: '',
+    }
+  },
+  watch:{
+    // 'query': function(query) {
+    //   console.log(query, ' from App')
+    //   window.history.pushState(null, document.title, `${window.location.pathname}?search=${query}`)
+    // }
+  },
+  // created() {
+  //   if(location.href.includes('details')) {
+  //     this.detailed = true
+  //     // this.meal = await fetch('api/details');
+  //   }
+  //   else{
+  //     // const windowData = Object.fromEntries(new URL(window.location).searchParams.entries());
+  //     // this.detailed = false;
+  //     // console.log(windowData.search)
+  //     // this.meals = windowData.search;
   //   }
   // },
+  async created() {
+    this.query = new URLSearchParams(location.search).get('search');
+
+    if(this.query){
+      this.meals = await SearchService.search(this.query);
+    }
+  },
+  // computed: {
+  // },
+  async mounted() {
+    await this.loadImages();
+    
+  },
+  methods: {
+    async loadImages() {
+      const response = await ImagesService.getAllImages();
+      this.imagesUrl = response.map((meal) => meal.thumb);
+    },
+    getListOfMeals(meals){
+      this.meals = meals;
+    },
+    // getQuery(query){
+    //   this.query = query;
+    // }
+    //   getAllRecipesByName(){
+    //     return this.recipesByName = JSON.parse(JSON.stringify(this.searchedRecipe));
+    //   }
+  },
 };
 </script>
 
-<style>
-
-
-
-</style>
+<style></style>

@@ -1,7 +1,7 @@
 <template>
-    <div class="header__wrapper">
+    <div class="header__wrapper d-flex">
         <page-header/>
-        <search-bar/>
+        <!-- <search-bar/> -->
     </div>
     
 
@@ -34,6 +34,8 @@
     </div> -->
   </div>
 
+  <recipes-serched-list/>
+
 </template>
 
 <script>
@@ -41,13 +43,15 @@ import PageHeader from '@/components/shared/PageHeader.vue';
 import InfinitySliderCarousel from '@/components/InfinitySliderCarousel.vue';
 import ImagesService from '@/services/images-service';
 import SearchBar from '@/components/shared/SearchBar.vue';
+import RecipesSerchedList from '@/components/RecipesSerchedList.vue';
 
 export default({
     components: {
-        PageHeader,
-        InfinitySliderCarousel,
-        SearchBar
-    },
+    PageHeader,
+    InfinitySliderCarousel,
+    SearchBar,
+    RecipesSerchedList
+},
     data(){
         return {
             imagesUrl: [],
@@ -66,7 +70,7 @@ export default({
 })
 </script>
 
-<style scoped>
+<style>
 .container {
   max-width: 1240px;
   margin: 0 auto;

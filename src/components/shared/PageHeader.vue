@@ -19,8 +19,7 @@
                 </li>
                 </ul>
             </nav>
-            
-            <!-- <search-bar/> -->
+        
 
             <div class="profile__section">
                 <li class="profile">
