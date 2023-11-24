@@ -49,7 +49,7 @@
     })
 </script>
 
-<style scoped>
+<style>
 .container {
   max-width: 1240px;
   margin: 0 auto;

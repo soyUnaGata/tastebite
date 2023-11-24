@@ -43,7 +43,7 @@ export default ({
   // },
   watch: {
     'query': function (val) {
-     window.history.pushState(null, document.title, `${window.location.pathname}?search=${val}`)
+    //  window.history.pushState(null, document.title, `${window.location.pathname}?search=${val}`)
     }
   },
   computed: {
@@ -75,8 +75,8 @@ export default ({
     },
 
     showFullList() {
+      window.history.pushState(null, document.title, `${window.location.pathname}?search=${this.query}`)
       this.$emit('list-of-meals', this.meals);
-      // this.$emit('search-value', this.query)
     }
   },
   async mounted() {
