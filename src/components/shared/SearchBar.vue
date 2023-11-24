@@ -8,7 +8,7 @@
         <img class="search__icon" @click="showSearchInput" src="@/assets/img/search.svg" alt="" />
       </div>
 
-      <div class="recipes__searched-list d-flex flex-column"> !--- v-if="!searchRecipe" ---!
+      <div class="recipes__searched-list d-flex flex-column" v-if="query"> 
         <ul class="recipes__list d-flex align-items-center" v-for="recipe in meals" :key="recipe.id">
           <img class="recipes__items-image" :src="recipe.thumb" alt="">
           <li class="recipes__items">{{ recipe.meal }}</li>
@@ -21,7 +21,6 @@
 <script>
 import debounce from "lodash.debounce";
 import SearchService from "@/services/search-service.js";
-import UrlService from '@/services/UriService'
 
 export default ({
   data() {
@@ -75,8 +74,10 @@ export default ({
     },
 
     showFullList() {
-      window.history.pushState(null, document.title, `${window.location.pathname}?search=${this.query}`)
+      window.history.pushState(null, document.title, `${window.location.pathname}?search=${this.query}`);
       this.$emit('list-of-meals', this.meals);
+      this.searchInputState = false;
+      this.query = '';
     }
   },
   async mounted() {
@@ -111,7 +112,7 @@ export default ({
 
 .recipes__searched-list {
   position: absolute;
-  transform: translateY(15%);
+  transform: translateY(25%);
   width: 450px;
   height: 350px;
   overflow-y: scroll;

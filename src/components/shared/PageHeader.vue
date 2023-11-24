@@ -1,5 +1,5 @@
 <template>
-    <div class="container d-flex">
+    <div class="d-flex w-100">
         <div class="header__inner d-flex justify-content-between align-items-center">
             <logo-company/>
 

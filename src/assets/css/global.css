@@ -70,4 +70,11 @@
 .text-uppercase {
     text-transform: uppercase;
 }
+.w-100 {
+  width: 100%;
+}
+
+.g-10 {
+  gap: 10px;
+}
 

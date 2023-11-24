@@ -1,6 +1,6 @@
 <template>
   <!-- <RouterView/> -->
-  <div class="header__wrapper d-flex">
+  <div class="header__wrapper container d-flex g-10">
     <page-header />
     <search-bar @list-of-meals="getListOfMeals"/>
   </div>
