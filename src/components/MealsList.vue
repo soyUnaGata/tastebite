@@ -6,7 +6,10 @@
 
   <div class="container recipes__list">
     <div class="recipes__list-filterd container">
-      <div class="recipe__card d-flex flex-column" v-for="meal in meals">
+      <div class="recipe__card d-flex flex-column" 
+      v-for="meal in meals"
+      @click="showRecipe(meal)"
+      >
         <img class="recipe__img" :src="meal.thumb" alt="">
         <div class="recipe__about d-flex flex-column">
           <p class="recipe__category">{{ meal.category }},
@@ -43,16 +46,21 @@ export default ({
   //     // this.$store.getters.uptadetRecipes = windowData.search;
   //   }
   // },
-  // watch:{
-  //   '$store.getters.value': function(val) {
-  //     console.log(val)
-  //     window.history.pushState(null, document.title, `${window.location.pathname}?search=${val}`)
-  //   }
-  // },
+  watch:{
+    '': function(val) {
+      console.log(val)
+      // window.history.pushState(null, document.title, `${window.location.pathname}?search=${val}`)
+    }
+  },
   computed: {
     searchedRecipe() {
       return this.$store.getters.uptadetRecipes;
     },
+  },
+  methods:{
+    showRecipe(meal){
+      this.$emit('show-meal-recipe', meal);
+    }
   },
   async mounted(){
     // await this.SearchService();

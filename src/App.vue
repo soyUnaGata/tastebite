@@ -35,19 +35,21 @@
     </div> -->
   </div>
 
-  <details v-if="details" :meal="meal" />
-  <meals-list v-else :meals="meals" />
+  <meal-details v-if="details" :meal="meal" :key="meal.id" />
+  <meals-list v-else :meals="meals" 
+  @show-meal-recipe="getMealRecipe"/>
 </template>
 
 <script>
 // import { RouterView } from "vue-router";
-import debounce from "lodash.debounce";
 import PageHeader from '@/components/shared/PageHeader.vue';
 import InfinitySliderCarousel from '@/components/InfinitySliderCarousel.vue';
 import ImagesService from '@/services/images-service';
 import SearchBar from '@/components/shared/SearchBar.vue';
 import MealsList from '@/components/MealsList.vue';
 import SearchService from "@/services/search-service.js";
+import MealService from "@/services/meal-service";
+import MealDetails from "./components/MealDetails.vue";
 
 
 
@@ -56,22 +58,28 @@ export default {
     PageHeader,
     InfinitySliderCarousel,
     SearchBar,
-    MealsList
+    MealsList,
+    MealDetails
   },
   data() {
     return {
-      detailed: false,
-      meal: {},
+      details: false,
+      meal: [],
       meals: [],
       imagesUrl: [],
       query: '',
+      mealId:'',
     }
   },
-  watch:{
-    // 'query': function(query) {
-    //   console.log(query, ' from App')
-    //   window.history.pushState(null, document.title, `${window.location.pathname}?search=${query}`)
-    // }
+  watch: {
+    'meals': async function(){
+      if(this.meals.length){
+        this.details = false;
+      }
+    },
+    'meal': async function(){
+      console.log(this.meal)
+    },
   },
   // created() {
   //   if(location.href.includes('details')) {
@@ -87,13 +95,20 @@ export default {
   // },
   async created() {
     this.query = new URLSearchParams(location.search).get('search');
+    
 
     if(this.query){
       this.meals = await SearchService.search(this.query);
     }
+    else{
+      this.details = true;
+      this.mealId = new URLSearchParams(location.search).get('meal');
+      this.meal = await MealService.search(this.mealId)
+    }
   },
-  // computed: {
-  // },
+  computed: {
+
+  },
   async mounted() {
     await this.loadImages();
     
@@ -106,12 +121,11 @@ export default {
     getListOfMeals(meals){
       this.meals = meals;
     },
-    // getQuery(query){
-    //   this.query = query;
-    // }
-    //   getAllRecipesByName(){
-    //     return this.recipesByName = JSON.parse(JSON.stringify(this.searchedRecipe));
-    //   }
+    getMealRecipe(meal){
+      window.history.pushState(null, document.title, `${window.location.pathname}?meal=${meal.id}`);
+      this.meal = meal;
+      this.details = true;
+    }
   },
 };
 </script>
