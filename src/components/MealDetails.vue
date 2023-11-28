@@ -17,6 +17,9 @@
                     </span>
                 </div>
 
+                <div class="meal__description">
+                    <p v-html="formatInstructions(meal.instructions)"></p>
+                </div>
             </div>
             
         </div>
@@ -55,6 +58,19 @@ export default {
         },
         mounted() {
 
+        },
+        methods: {
+            formatInstructions(instructions) {
+                if(instructions){
+                    const steps = instructions.split(/\d+\s*/).filter(Boolean);
+                    return steps.map((step, index) => 
+                    `<p class="instruction-step">
+                        <span class="instruction-step__number">${index + 1}</span> 
+                    ${step.trim()}
+                    </p>`)
+                    .join('');
+                }
+            },
         },
         // computed: {
         //     mealDetails() {
