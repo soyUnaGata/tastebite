@@ -7,6 +7,13 @@ class MealService {
         .then(({meals}) => {
             if(!meals || !meals.length) return;
             const meal = meals[0];   
+            const ingridients  =  Object.keys(meal)
+            .filter((p) => p.includes("Ingredient"))
+            .map((p) => meal[p]);
+            const measures = Object.keys(meal)
+            .filter((p) => p.includes("Measure"))
+            .map((p) => meal[p]);
+
             return {
                 id: meal.idMeal,
                 meal: meal.strMeal,
@@ -16,12 +23,7 @@ class MealService {
                 instructions: meal.strInstructions,
                 thumb: meal.strMealThumb,
                 youtube: meal.strYoutube,
-                ingredients: Object.keys(meal)
-                  .filter((p) => p.includes("Ingredient"))
-                  .map((p) => meal[p]),
-                measures: Object.keys(meal)
-                  .filter((p) => p.includes("Measure"))
-                  .map((p) => meal[p]),
+                ingredients: ingridients.map((val, inx) => ({ingridient: val, measure: measures[inx]})),
                 source: meal.strSource,
                 imageSource: meal.strImageSource,
               };
