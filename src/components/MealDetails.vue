@@ -4,7 +4,7 @@
             <h1>{{ meal.meal}}</h1>
         </div>
         <div class="separator"></div>
-        <div class="meal__details d-flex g-30">
+        <div class="meal__details m-top-30 d-flex g-30">
             <img :src="meal.thumb" class="meal__img" :alt="meal.meal">
 
             <div class="meal__about d-flex flex-column g-20">
@@ -17,14 +17,21 @@
                     </span>
                 </div>
 
-                <div class="meal__ingridients d-flex g-10" v-for="(item, key) in meal.ingredients" :key="key">
-                    <input v-if="item.ingridient !== ''" class="checkbox" type="checkbox"  :id="item.measure"/>
-                    <label :for="item.measure" class="checkbox__item d-flex g-10">
+            </div>
+            
+        </div>
+
+        <div class="meal__ingridients m-top-30 d-flex flex-column g-10">
+            <div class="meal__ingridients-list d-flex flex-column g-10">
+                <div class="custom d-flex flex-column" v-for="(item, key) in meal.ingredients" :key="key">
+                    <label v-if="item.ingridient !== ''"  :for="item.ingridient" class="checkbox__item d-flex g-10">
+                        <input  class="checkbox-input d-flex flex-column" type="checkbox"  :id="item.ingridient"/>
+                        <span class="checkmark"></span>
                         <span> {{ item.measure }}</span>
                         <span>{{ item.ingridient}}</span>
                     </label>
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
 </template>
@@ -69,17 +76,12 @@ export default {
     border: 1px solid var(--primary);
     margin-top: 5px;
 }
-
-.meal__details {
-    margin-top: 30px;
-}
 .meal__img {
     width: 420px;
     height: 410px;
     border-radius: 10px;
     object-fit: cover;
 }
-
 .meal__item {
     font-size: 18px;
     color: var(--headlines);
@@ -89,5 +91,77 @@ export default {
     font-weight: 600;
     color: var(--primary);
 }
+.checkbox__item {
+    font-size: 22px;
+    color: var(--headlines);
+    cursor: pointer;
+}
 
+.custom {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+}
+
+.custom input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  
+border-radius: 15px;
+}
+
+.custom:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.custom input:checked ~ .checkmark {
+  background-color: var(--secondary);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.custom .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.custom input:checked ~ .checkmark ~ span {
+  text-decoration: line-through;
+  text-decoration-color: var(--secondary);
+}
 </style>
