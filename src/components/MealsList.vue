@@ -47,8 +47,8 @@ export default ({
   //   }
   // },
   watch:{
-    '': function(val) {
-      console.log(val)
+    'meals.length': function(val) {
+      console.log(this.meals.map(x => x.instructions))
       // window.history.pushState(null, document.title, `${window.location.pathname}?search=${val}`)
     }
   },
