@@ -1,6 +1,8 @@
 :root{
     --primary: #57375D;
     --secondary: #ff642f;
+    --secondary-light: #ffb399;
     --headlines: #000;
+    --white: #ffffff;
     --for-search-list: 2;
 }
