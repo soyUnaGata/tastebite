@@ -1,4 +1,5 @@
 <template>
+      <return-button/>
     <div class="container">
         <div class="meal__header">
             <h1>{{ meal.meal}}</h1>
@@ -37,15 +38,6 @@
                         <p class="show__video-text">Show video instruction</p>
                       </a>                      
                    </div> -->
-
-                   <!-- <a class="show__video d-flex align-items-center" :href="meal.youtube" target="_blank">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        Show video instruction
-                    </a> -->
-
                     <show-button v-if="meal.youtube !== ''" :videoLink="meal.youtube"
                     :buttonText="'Show video instruction'"/>
 
@@ -69,10 +61,12 @@
 
 <script>
 import ShowButton from './shared/ShowButton.vue';
+import ReturnButton from './shared/ReturnButton.vue';
 
 export default {
   components: {
-    ShowButton
+    ShowButton,
+    ReturnButton
   },
         props:{
             meal: {
