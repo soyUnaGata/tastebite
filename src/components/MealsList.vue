@@ -39,7 +39,6 @@ export default ({
   components: {
     PageHeader,
     SearchBar,
-    ReturnButton
   },
   // created(){
   //   const windowData = Object.fromEntries(new URL(window.location).searchParams.entries());
