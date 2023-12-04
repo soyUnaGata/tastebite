@@ -4,6 +4,7 @@
     <!-- <search-bar/> -->
   </div>
 
+
   <div class="container recipes__list">
     <div class="recipes__list-filterd container">
       <div class="recipe__card d-flex flex-column" 
@@ -28,6 +29,7 @@ import SearchBar from '@/components/shared/SearchBar.vue';
 
 
 
+
 export default ({
   props:{
     meals: {
@@ -36,7 +38,8 @@ export default ({
   },
   components: {
     PageHeader,
-    SearchBar
+    SearchBar,
+    ReturnButton
   },
   // created(){
   //   const windowData = Object.fromEntries(new URL(window.location).searchParams.entries());

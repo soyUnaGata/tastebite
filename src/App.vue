@@ -7,12 +7,12 @@
 
 
   <div class="main container">
-    <div class="headline">
+    <!-- <div class="headline">
       <h1>
         Recipe
         <p>Marketplace</p>
       </h1>
-    </div>
+    </div> -->
     <!-- <div class="image-carousel">
       <infinity-slider-carousel
         :images="imagesUrl"
@@ -77,8 +77,34 @@ export default {
         this.details = false;
       }
     },
-    'meal': async function(){
-      console.log(this.meal)
+    'meal': async function(newMealValue){
+      if(newMealValue){
+        this.query = new URLSearchParams(location.search).get('search');
+    
+
+    if(this.query){
+      this.meals = await SearchService.search(this.query);
+    }
+    else{
+      this.details = true;
+      this.mealId = new URLSearchParams(location.search).get('meal');
+      this.meal = await MealService.search(this.mealId);
+    }
+      }
+    },
+    'details': async function(){
+      this.query = new URLSearchParams(location.search).get('search');
+    
+
+    if(this.query){
+      this.meals = await SearchService.search(this.query);
+    }
+    else{
+      this.details = true;
+      this.mealId = new URLSearchParams(location.search).get('meal');
+      this.meal = await MealService.search(this.mealId);
+    }
+      
     },
   },
   // created() {
@@ -94,6 +120,8 @@ export default {
   //   }
   // },
   async created() {
+    // window.addEventListener('popstate', this.handlePopState);
+
     this.query = new URLSearchParams(location.search).get('search');
     
 
@@ -125,7 +153,24 @@ export default {
       window.history.pushState(null, document.title, `${window.location.pathname}?meal=${meal.id}`);
       this.meal = meal;
       this.details = true;
-    }
+    },
+  //   async handlePopState(event) {
+  //   const state = event.state;
+
+  //   if (state) {
+  //     this.query = state.query;
+  //     this.mealId = state.mealId;
+  //     this.details = state.details;
+
+  //     if (this.query) {
+  //       this.meals = await SearchService.search(this.query);
+  //     } else {
+  //       this.details = true;
+  //       this.mealId = new URLSearchParams(location.search).get('meal');
+  //       this.meal = await MealService.search(this.mealId);
+  //     }
+  //   }
+  // },
   },
 };
 </script>

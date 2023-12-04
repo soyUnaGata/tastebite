@@ -21,7 +21,7 @@
 }
 
 .return__btn-img {
-  width: 30px;
+  width: 22px;
   padding: 8px 0px;
 }
 
