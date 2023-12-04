@@ -1,7 +1,12 @@
 <template>
-      <return-button/>
     <div class="container">
-        <div class="meal__header">
+        <nav class="meal__navigation m-top-50">
+            <ul class="d-flex align-items-center justify-content-between">
+                <li><return-button/></li>
+                <li><bookmark-icon/></li>
+            </ul>
+        </nav>
+        <div class="meal__header m-top-30">
             <h1>{{ meal.meal}}</h1>
         </div>
         <div class="separator"></div>
@@ -10,12 +15,12 @@
                 <div class="meal__ingridients d-flex flex-column g-20">
                     <img :src="meal.thumb" class="meal__img" :alt="meal.meal">
                     <div class="meal__ingridients-list d-flex flex-column g-10">
-                        <div class="custom d-flex flex-column" v-for="(item, key) in meal.ingredients" :key="key">
-                            <label v-if="item.ingridient !== ''"  :for="item.ingridient" class="checkbox__item d-flex g-10">
-                                <input  class="checkbox-input d-flex flex-column" type="checkbox"  :id="item.ingridient"/>
+                        <div class="custom d-flex flex-column" v-for="(item, key) in meal.ingredients?.filter(item => !!item.ingridient) " :key="key">
+                            <label :for="item.ingridient" class="checkbox__item d-flex g-10">
+                                <input class="checkbox-input d-flex flex-column" type="checkbox" :id="item.ingridient"/>
                                 <span class="checkmark"></span>
                                 <span> {{ item.measure }}</span>
-                                <span>{{ item.ingridient}}</span>
+                                <span> {{ item.ingridient}}</span>
                             </label>
                         </div>
                     </div> 
@@ -33,11 +38,6 @@
                         </span>
                    </div>
 
-                   <!-- <div class="meal__category-video">
-                      <a class="show__video inverted-7 d-flex align-items-center" :href="meal.youtube" target="_blank">
-                        <p class="show__video-text">Show video instruction</p>
-                      </a>                      
-                   </div> -->
                     <show-button v-if="meal.youtube !== ''" :videoLink="meal.youtube"
                     :buttonText="'Show video instruction'"/>
 
@@ -52,9 +52,6 @@
         </div>
             
         </div>
-
-    
-
      
     </div>
 </template>
@@ -62,11 +59,13 @@
 <script>
 import ShowButton from './shared/ShowButton.vue';
 import ReturnButton from './shared/ReturnButton.vue';
+import BookmarkIcon from './shared/BookmarkIcon.vue';
 
 export default {
   components: {
     ShowButton,
-    ReturnButton
+    ReturnButton,
+    BookmarkIcon
   },
         props:{
             meal: {

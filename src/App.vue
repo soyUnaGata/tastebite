@@ -132,6 +132,7 @@ export default {
       this.details = true;
       this.mealId = new URLSearchParams(location.search).get('meal');
       this.meal = await MealService.search(this.mealId);
+      console.log(this.meal)
     }
   },
   computed: {

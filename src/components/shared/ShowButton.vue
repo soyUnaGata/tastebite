@@ -34,14 +34,8 @@
   overflow: hidden;
 }
 .show__video:hover{
-  background-color: var(--secondary-light);
+  background-color: var(--secondary);
   color: var(--white);
-  box-shadow: 0 0 5px var(--secondary),
-              0 0 25px var(--secondary),
-              0 0 50px var(--secondary),
-              0 0 45px var(--secondary);
-
-  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
 }
 
 .show__video:first-child{
