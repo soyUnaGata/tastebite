@@ -2,57 +2,58 @@
     <div class="container">
         <nav class="meal__navigation m-top-50">
             <ul class="d-flex align-items-center justify-content-between">
-                <li><return-button @click="back"/></li>
-                <li><bookmark-icon/></li>
+                <li><return-button @click="back" /></li>
+                <li><bookmark-icon @click="toogleFavorites(meal)"/></li>
             </ul>
         </nav>
         <div class="meal__header m-top-30">
-            <h1>{{ meal.meal}}</h1>
+            <h1>{{ meal.meal }}</h1>
         </div>
-        <div class="separator"></div>
+        <div class="separator m-top-5"></div>
         <div class="meal__details m-top-30 d-flex g-30">
-            <div class="meal__information d-flex g-30">                
+            <div class="meal__information d-flex g-30">
                 <div class="meal__ingridients d-flex flex-column g-20">
                     <img :src="meal.thumb" class="meal__img" :alt="meal.meal">
                     <div class="meal__ingridients-list d-flex flex-column g-10">
-                        <div class="custom d-flex flex-column" v-for="(item, key) in meal.ingredients?.filter(item => !!item.ingridient) " :key="key">
+                        <div class="custom d-flex flex-column"
+                            v-for="(item, key) in meal.ingredients?.filter(item => !!item.ingridient) " :key="key">
                             <label :for="item.ingridient" class="checkbox__item d-flex g-10">
-                                <input class="checkbox-input d-flex flex-column" type="checkbox" :id="item.ingridient"/>
+                                <input class="checkbox-input d-flex flex-column" type="checkbox" :id="item.ingridient" />
                                 <span class="checkmark"></span>
                                 <span> {{ item.measure }}</span>
-                                <span> {{ item.ingridient}}</span>
+                                <span> {{ item.ingridient }}</span>
                             </label>
                         </div>
-                    </div> 
+                    </div>
                 </div>
 
-            <div class="meal__description-about">
-            <div class="meal__about d-flex flex-column g-20">
-                <div class="meal__category d-flex align-items-center justify-content-between g-20">
-                   <div class="meal__category-details d-flex g-20">
-                        <span class="meal__item">Category:
-                        <span>{{ meal.category}}</span>
-                        </span>
-                        <span class="meal__item">Area:
-                            <span>{{ meal.area}}</span>
-                        </span>
-                   </div>
+                <div class="meal__description-about">
+                    <div class="meal__about d-flex flex-column g-20">
+                        <div class="meal__category d-flex align-items-center justify-content-between g-20">
+                            <div class="meal__category-details d-flex g-20">
+                                <span class="meal__item">Category:
+                                    <span>{{ meal.category }}</span>
+                                </span>
+                                <span class="meal__item">Area:
+                                    <span>{{ meal.area }}</span>
+                                </span>
+                            </div>
 
-                    <show-button v-if="meal.youtube !== ''" :videoLink="meal.youtube"
-                    :buttonText="'Show video instruction'"/>
+                            <show-button v-if="meal.youtube !== ''" :videoLink="meal.youtube"
+                                :buttonText="'Show video instruction'" />
 
-                </div>
+                        </div>
 
-                <div class="meal__description d-flex flex-column g-10">
-                    <p class="meal__description-header">Instruction:</p>
-                    <div class="meal__description-text" v-html="formattedInstructions"></div>
+                        <div class="meal__description d-flex flex-column g-10">
+                            <p class="meal__description-header">Instruction:</p>
+                            <div class="meal__description-text" v-html="formattedInstructions"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
-            
-        </div>
-     
+        <div class="separator m-top-30"></div>
+
     </div>
 </template>
 
@@ -60,65 +61,76 @@
 import ShowButton from './shared/ShowButton.vue';
 import ReturnButton from './shared/ReturnButton.vue';
 import BookmarkIcon from './shared/BookmarkIcon.vue';
+import FavoritesMeals from '@/services/favorites-meals.js'
 
 export default {
-  components: {
-    ShowButton,
-    ReturnButton,
-    BookmarkIcon
-  },
-        props:{
-            meal: {
-                type: Object,
-            },
+    components: {
+        ShowButton,
+        ReturnButton,
+        BookmarkIcon
+    },
+    props: {
+        meal: {
+            type: Object,
         },
-        // watch:{
-        //     'meal': function () {
-        //         console.log(this.mealDetails, 'in details')
-        //     }
-        // },
-        data(){
-            return {
-            }
-        },
-        mounted() {
+    },
+    // watch:{
+    //     'meal': function () {
+    //         console.log(this.mealDetails, 'in details')
+    //     }
+    // },
+    data() {
+        return {
+            selectedMeal: null,
+        }
+    },
+    mounted() {
 
-        },
-        methods: {
-            formatTextToHTML: function (str) {
-                const newLine = '\r\n';
-                if (!str) return '';
-                if (str.startsWith(newLine)) str = str.replace(newLine, '');
+    },
+    methods: {
+        formatTextToHTML: function (str) {
+            const newLine = '\r\n';
+            if (!str) return '';
+            if (str.startsWith(newLine)) str = str.replace(newLine, '');
 
-                let formatted = '';
-                const stepRegex = /^\d+/gs;
-                const parts = str.split(newLine);
+            let formatted = '';
+            const stepRegex = /^\d+/gs;
+            const parts = str.split(newLine);
 
-                for (let i = 0; i < parts.length; i++) {
-                    const part = parts[i];
+            for (let i = 0; i < parts.length; i++) {
+                const part = parts[i];
 
-                    if(!stepRegex.test(part)) {
-                        formatted += `<p>${part}</p>`;
-                        continue;
-                    }
-
-                    formatted += `<p>${part} ${parts[i + 2]}</p>`;
-                    i+=2;
+                if (!stepRegex.test(part)) {
+                    formatted += `<p>${part}</p>`;
+                    continue;
                 }
 
-                return formatted;
-            },
-
-            back(){
-                history.back();
+                formatted += `<p>${part} ${parts[i + 2]}</p>`;
+                i += 2;
             }
+
+            return formatted;
         },
-        computed: {
-            formattedInstructions() {
-                if(!this.meal?.instructions) return ''; 
-                return this.formatTextToHTML(this.meal.instructions)
-            },
+
+        back() {
+            history.back();
         },
+
+        toogleFavorites(meal){
+            
+            if(FavoritesMeals.exists(meal)){
+                FavoritesMeals.remove(meal);
+            }else{
+                FavoritesMeals.add(meal);
+            }
+        }
+    },
+    computed: {
+        formattedInstructions() {
+            if (!this.meal?.instructions) return '';
+            return this.formatTextToHTML(this.meal.instructions)
+        },
+    },
 
 }
 </script>
@@ -132,23 +144,26 @@ export default {
 .separator {
     width: 100%;
     border: 1px solid var(--primary);
-    margin-top: 5px;
 }
+
 .meal__img {
     width: 420px;
     height: 410px;
     border-radius: 10px;
     object-fit: cover;
 }
+
 .meal__item {
     font-size: 18px;
     color: var(--headlines);
 }
-.meal__item > span {
+
+.meal__item>span {
     font-size: 20px;
     font-weight: 600;
     color: var(--primary);
 }
+
 .checkbox__item {
     font-size: 22px;
     color: var(--headlines);
@@ -156,70 +171,70 @@ export default {
 }
 
 .custom {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
 }
 
 .custom input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
 }
 
 .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-  border-radius: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 15px;
 }
 
-.custom:hover input ~ .checkmark {
-  background-color: #ccc;
+.custom:hover input~.checkmark {
+    background-color: #ccc;
 }
 
-.custom input:checked ~ .checkmark {
-  background-color: var(--secondary);
+.custom input:checked~.checkmark {
+    background-color: var(--secondary);
 }
 
 .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
+    content: "";
+    position: absolute;
+    display: none;
 }
 
-.custom input:checked ~ .checkmark:after {
-  display: block;
+.custom input:checked~.checkmark:after {
+    display: block;
 }
 
 .custom .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
-.custom input:checked ~ .checkmark ~ span {
-  text-decoration: line-through;
-  text-decoration-color: var(--secondary);
+.custom input:checked~.checkmark~span {
+    text-decoration: line-through;
+    text-decoration-color: var(--secondary);
 }
 
 .meal__description-header {
@@ -230,7 +245,4 @@ export default {
 
 .meal__description-text {
     font-size: 20px;
-}
-
-
-</style>
+}</style>
