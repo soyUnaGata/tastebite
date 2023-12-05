@@ -2,7 +2,7 @@
     <div class="container">
         <nav class="meal__navigation m-top-50">
             <ul class="d-flex align-items-center justify-content-between">
-                <li><return-button/></li>
+                <li><return-button @click="back"/></li>
                 <li><bookmark-icon/></li>
             </ul>
         </nav>
@@ -107,6 +107,10 @@ export default {
                 }
 
                 return formatted;
+            },
+
+            back(){
+                history.back();
             }
         },
         computed: {
