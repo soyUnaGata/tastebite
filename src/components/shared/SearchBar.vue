@@ -103,7 +103,7 @@ export default ({
 }
 
 .search__input-item {
-  width: 450px;
+  width: 350px;
 }
 
 .search__icon {

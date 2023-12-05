@@ -35,7 +35,8 @@
     </div> -->
   </div>
 
-  <meal-details v-if="details" :meal="meal" :key="meal.id" />
+  <meal-details v-if="details" :meal="meal" 
+  :key="meal.id"/>
   <meals-list v-else :meals="meals" 
   @show-meal-recipe="getMealRecipe"/>
 </template>
@@ -107,23 +108,8 @@ export default {
       
     },
   },
-  // created() {
-  //   if(location.href.includes('details')) {
-  //     this.detailed = true
-  //     // this.meal = await fetch('api/details');
-  //   }
-  //   else{
-  //     // const windowData = Object.fromEntries(new URL(window.location).searchParams.entries());
-  //     // this.detailed = false;
-  //     // console.log(windowData.search)
-  //     // this.meals = windowData.search;
-  //   }
-  // },
   async created() {
-    // window.addEventListener('popstate', this.handlePopState);
-
     this.query = new URLSearchParams(location.search).get('search');
-    
 
     if(this.query){
       this.meals = await SearchService.search(this.query);
@@ -132,7 +118,6 @@ export default {
       this.details = true;
       this.mealId = new URLSearchParams(location.search).get('meal');
       this.meal = await MealService.search(this.mealId);
-      console.log(this.meal)
     }
   },
   computed: {
@@ -155,23 +140,6 @@ export default {
       this.meal = meal;
       this.details = true;
     },
-  //   async handlePopState(event) {
-  //   const state = event.state;
-
-  //   if (state) {
-  //     this.query = state.query;
-  //     this.mealId = state.mealId;
-  //     this.details = state.details;
-
-  //     if (this.query) {
-  //       this.meals = await SearchService.search(this.query);
-  //     } else {
-  //       this.details = true;
-  //       this.mealId = new URLSearchParams(location.search).get('meal');
-  //       this.meal = await MealService.search(this.mealId);
-  //     }
-  //   }
-  // },
   },
 };
 </script>
