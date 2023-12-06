@@ -76,7 +76,6 @@ export default ({
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   align-self: start;
-  /* height: 360px; */
   width: 300px;
   cursor: pointer;
   overflow: hidden;
@@ -94,11 +93,6 @@ export default ({
   gap: 10px;
   padding: 15px;
 }
-
-.recipe__category {}
-
-.recipe__area {}
-
 .recipe__headline {
   white-space: nowrap;
   overflow: hidden;

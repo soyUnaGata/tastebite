@@ -3,14 +3,17 @@
     <div class="search__wrapper d-flex">
       <div class="search__item d-flex align-items-center">
         <label class="search__input" v-show="searchInputState" for="">
-          <input class="search__input-item" @input="search" type="text" @keyup.enter="showFullList" />
+          <input class="search__input-item" 
+          placeholder="Search recipe..."
+          @input="search" type="text" 
+          @keyup.enter="showFullList" />
         </label>
         <img class="search__icon" @click="showSearchInput" src="@/assets/img/search.svg" alt="" />
       </div>
 
-      <div class="recipes__searched-list scroll-list d-flex flex-column"> 
-        <!-- v-if="query" -->
-        <ul class="recipes__list d-flex align-items-center" v-for="recipe in meals" :key="recipe.id">
+      <div class="recipes__searched-list scroll-list d-flex flex-column" v-show="query">
+        <ul class="recipes__list d-flex align-items-center" v-for="recipe in meals" :key="recipe.id"
+          @click="showFullRecipe(recipe.id)">
           <img class="recipes__items-image" :src="recipe.thumb" alt="">
           <li class="recipes__items">{{ recipe.meal }}</li>
         </ul>
@@ -50,17 +53,26 @@ export default ({
     search: debounce(async function (e) {
       this.query = e.target.value;
       this.meals = await SearchService.search(this.query);
+      if (e.keyCode === 13) {
+        this.query = ''
+      }
     }, 500),
 
     showFullList() {
       window.history.pushState(null, document.title, `${window.location.pathname}?search=${this.query}`);
-      this.$emit('list-of-meals', this.meals, this.query = '');
+      this.$emit('list-of-meals', this.meals);
       this.searchInputState = false;
       this.query = '';
+    },
+
+    showFullRecipe(meal) {
+      this.searchInputState = false;
+      this.query = '';
+      this.$emit('show-full-recipe', meal);
     }
   },
   async mounted() {
-    
+
   }
 })
 </script>
@@ -68,6 +80,32 @@ export default ({
 <style scoped>
 .search {
   gap: 15px;
+}
+
+.search__input-item {
+  width: 525px;
+  height: 45px;
+  padding: 6px 10px;
+  background-color: transparent;
+  border: 1px solid var(--secondary);
+  border-radius: 10px;
+}
+
+input[type="text"].search__input-item {
+  outline: none;
+  color: var(--headlines);
+  font-size: 16px;
+}
+
+input[type="text"].search__input-item:-webkit-autofil {
+  color: var(--headlines);
+  -webkit-text-fill-color: white;
+}
+
+input[type="text"].search__input-item::placeholder {
+  color: var(--secondary);
+  font-size: 15px;
+  font-weight: 200;
 }
 
 .search__wrapper {
@@ -119,30 +157,31 @@ export default ({
 }
 
 .scroll-list {
-    overflow: hidden;
-    overflow-y: scroll;
-    z-index: 89;
-    position: absolute;
-    background: var(--background-elements);
-    border-radius: 10px;
-    box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
-    backdrop-filter: blur(3.7px);
-    -webkit-backdrop-filter: blur(3.7px);
-    border: 1px solid rgba(255, 100, 47, 0.67);
-    padding-left: 7px;
-    padding-top: 10px;
-}
-.scroll-list::-webkit-scrollbar{
-    height: 10px;
-    width: 8px;
-}
-.scroll-list::-webkit-scrollbar-track{
-    background-color: transparent;   
-}
-.scroll-list::-webkit-scrollbar-thumb{
-    background-color: var(--secondary-light);
-    height: 38px;
-    border-radius: 10px;
+  overflow: hidden;
+  overflow-y: scroll;
+  z-index: 89;
+  position: absolute;
+  background: var(--background-elements);
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
+  backdrop-filter: blur(3.7px);
+  -webkit-backdrop-filter: blur(3.7px);
+  border: 1px solid rgba(255, 100, 47, 0.67);
+  padding-left: 7px;
+  padding-top: 10px;
 }
 
-</style>
+.scroll-list::-webkit-scrollbar {
+  height: 10px;
+  width: 8px;
+}
+
+.scroll-list::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.scroll-list::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-light);
+  height: 38px;
+  border-radius: 10px;
+}</style>

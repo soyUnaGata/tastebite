@@ -2,7 +2,8 @@
   <!-- <RouterView/> -->
   <div class="header__wrapper container d-flex g-10">
     <page-header />
-    <search-bar @list-of-meals="getListOfMeals"/>
+    <search-bar @list-of-meals="getListOfMeals"
+    @show-full-recipe="getRecipe"/>
   </div>
 
 
@@ -140,6 +141,11 @@ export default {
       this.meal = meal;
       this.details = true;
     },
+    getRecipe(meal){
+      window.history.pushState(null, document.title, `${window.location.pathname}?meal=${meal}`);
+      this.meal = meal;
+      this.details = true;
+    }
   },
 };
 </script>
