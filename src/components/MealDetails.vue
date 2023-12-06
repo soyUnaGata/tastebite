@@ -3,7 +3,9 @@
         <nav class="meal__navigation m-top-50">
             <ul class="d-flex align-items-center justify-content-between">
                 <li><return-button @click="back" /></li>
-                <li><bookmark-icon @click="toogleFavorites(meal)"/></li>
+                <li><bookmark-icon @click="toogleFavorites(meal)" :favorited="favorited" />
+                   <!-- :class="[selectedMeal ? 'added' : 'not-added']" -->
+                </li>
             </ul>
         </nav>
         <div class="meal__header m-top-30">
@@ -74,14 +76,10 @@ export default {
             type: Object,
         },
     },
-    // watch:{
-    //     'meal': function () {
-    //         console.log(this.mealDetails, 'in details')
-    //     }
-    // },
     data() {
         return {
-            selectedMeal: null,
+            favorited: false,
+            favorites: FavoritesMeals.favorites
         }
     },
     mounted() {
@@ -117,21 +115,24 @@ export default {
         },
 
         toogleFavorites(meal){
-            
             if(FavoritesMeals.exists(meal)){
                 FavoritesMeals.remove(meal);
             }else{
                 FavoritesMeals.add(meal);
             }
+
+            this.favorited = FavoritesMeals.exists(this.meal);
         }
     },
     computed: {
         formattedInstructions() {
             if (!this.meal?.instructions) return '';
             return this.formatTextToHTML(this.meal.instructions)
-        },
+        }
     },
-
+    mounted(){
+        this.favorited = FavoritesMeals.exists(this.meal);
+    }
 }
 </script>
 
