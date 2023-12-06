@@ -8,7 +8,8 @@
         <img class="search__icon" @click="showSearchInput" src="@/assets/img/search.svg" alt="" />
       </div>
 
-      <div class="recipes__searched-list d-flex flex-column" v-if="query"> 
+      <div class="recipes__searched-list scroll-list d-flex flex-column"> 
+        <!-- v-if="query" -->
         <ul class="recipes__list d-flex align-items-center" v-for="recipe in meals" :key="recipe.id">
           <img class="recipes__items-image" :src="recipe.thumb" alt="">
           <li class="recipes__items">{{ recipe.meal }}</li>
@@ -30,59 +31,36 @@ export default ({
       meals: [],
     }
   },
-  // async created() {
-  //   const windowData = Object.fromEntries(new URL(window.location).searchParams.entries());
-  //   console.log(windowData.search, ' from Search')
-  //   if(windowData.search){
-  //     this.query = windowData.search;
-  //     this.meals = await SearchService.search(this.query);
-  //     console.log(this.meals, ' from Search meals')
-  //   }
-
-  // },
   watch: {
-    'query': function (val) {
-    //  window.history.pushState(null, document.title, `${window.location.pathname}?search=${val}`)
-    }
+    // 'query': function () {
+    //   if (!this.searchInputState){
+    //     this.query = '';
+    //     console.log(this.query)
+    //   }
+    // console.log(this.query)
+    // }
   },
   computed: {
-    // searchedRecipe(){
-    //   return this.$store.getters.allSearchRecipes;
-    // }
   },
   methods: {
     showSearchInput() {
       this.searchInputState = !this.searchInputState;
     },
 
-    // search: debounce(async function ({target}) {
-    //   this.$store.dispatch('updateValue', target.value);
-    //   await this.$store.dispatch('fetchAllSearchRecources');
-
-    // }, 500),
-
     search: debounce(async function (e) {
       this.query = e.target.value;
       this.meals = await SearchService.search(this.query);
     }, 500),
 
-    complete() {
-      this.$store.dispatch('updateSearchedList');
-      this.searchInputState = false;
-      this.$emit()
-      // this.$router.push({name: 'recipe-searched-list'});
-    },
-
     showFullList() {
       window.history.pushState(null, document.title, `${window.location.pathname}?search=${this.query}`);
-      this.$emit('list-of-meals', this.meals);
+      this.$emit('list-of-meals', this.meals, this.query = '');
       this.searchInputState = false;
       this.query = '';
     }
   },
   async mounted() {
-    //  if(!this.$store.getters.allSearchRecipes) await this.$store.dispatch('fetchAllSearchRecources');
-    // await this.search();
+    
   }
 })
 </script>
@@ -113,7 +91,7 @@ export default ({
 .recipes__searched-list {
   position: absolute;
   transform: translateY(25%);
-  width: 450px;
+  width: 350px;
   height: 350px;
   overflow-y: scroll;
   gap: 15px;
@@ -137,5 +115,34 @@ export default ({
 
 .recipes__items {
   font-size: 18px;
-  color: var(--primary);
-}</style>
+  color: var(--headlines);
+}
+
+.scroll-list {
+    overflow: hidden;
+    overflow-y: scroll;
+    z-index: 89;
+    position: absolute;
+    background: var(--background-elements);
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
+    backdrop-filter: blur(3.7px);
+    -webkit-backdrop-filter: blur(3.7px);
+    border: 1px solid rgba(255, 100, 47, 0.67);
+    padding-left: 7px;
+    padding-top: 10px;
+}
+.scroll-list::-webkit-scrollbar{
+    height: 10px;
+    width: 8px;
+}
+.scroll-list::-webkit-scrollbar-track{
+    background-color: transparent;   
+}
+.scroll-list::-webkit-scrollbar-thumb{
+    background-color: var(--secondary-light);
+    height: 38px;
+    border-radius: 10px;
+}
+
+</style>

@@ -1,10 +1,4 @@
 <template>
-  <div class="header__wrapper">
-    <!-- <page-header /> -->
-    <!-- <search-bar/> -->
-  </div>
-
-
   <div class="container recipes__list">
     <div class="recipes__list-filterd container">
       <div class="recipe__card d-flex flex-column" 
@@ -28,8 +22,6 @@ import PageHeader from '@/components/shared/PageHeader.vue';
 import SearchBar from '@/components/shared/SearchBar.vue';
 
 
-
-
 export default ({
   props:{
     meals: {
@@ -50,7 +42,7 @@ export default ({
   // },
   watch:{
     'meals.length': function(val) {
-      console.log(this.meals.map(x => x.instructions))
+      // console.log(this.meals.map(x => x.instructions))
       // window.history.pushState(null, document.title, `${window.location.pathname}?search=${val}`)
     }
   },
