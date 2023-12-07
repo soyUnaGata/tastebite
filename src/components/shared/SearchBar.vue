@@ -4,12 +4,10 @@
       <div class="search__item d-flex align-items-center">
         <Transition name="slide-fade">
           <label class="search__input" v-if="searchInputState" for="">
-           
               <input class="search__input-item" 
               placeholder="Search recipe..."
               @input="search" type="text" 
               @keyup.enter="showFullList" />
-         
           </label>
         </Transition>
           <img class="search__icon" @click="showSearchInput" src="@/assets/img/search.svg" alt="" />

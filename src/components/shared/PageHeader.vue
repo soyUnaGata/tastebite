@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex w-100">
-        <div class="header__inner d-flex justify-content-between align-items-center">
+        <div class="header__inner d-flex align-items-center">
             <logo-company/>
 
             <nav class="menu">
@@ -18,33 +18,17 @@
                     <a class="menu__list-link" href="">Buy</a>
                 </li>
                 </ul>
-            </nav>
-        
-
-            <div class="profile__section">
-                <li class="profile">
-                <a class="profile-link" href="">
-                    <img class="account__icon" src="@/assets/img/account.svg" alt="" />
-                </a>
-                </li>
-
-                <div class="burger-menu__mobile d-none">
-                <div class="burger-menu__about"></div>
-                </div>
-            </div>
-              
+            </nav>              
         </div>
   </div>
 </template>
 
 <script>
     import LogoCompany from './LogoCompany.vue';
-    import SearchBar from './SearchBar.vue';
 
     export default ({
         components: {
             LogoCompany,
-            SearchBar
         }
     })
 </script>
@@ -53,6 +37,10 @@
 .container {
   max-width: 1240px;
   margin: 0 auto;
+}
+
+.menu {
+    margin: 0 auto;
 }
 
 .header__inner {

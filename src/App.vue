@@ -1,9 +1,10 @@
 <template>
   <!-- <RouterView/> -->
-  <div class="header__wrapper container d-flex g-10">
+  <div class="header__wrapper container d-flex g-10 align-items-center ">
     <page-header />
     <search-bar @list-of-meals="getListOfMeals"
     @show-full-recipe="getRecipe"/>
+    <profile-section/>
   </div>
 
 
@@ -52,6 +53,7 @@ import MealsList from '@/components/MealsList.vue';
 import SearchService from "@/services/search-service.js";
 import MealService from "@/services/meal-service";
 import MealDetails from "./components/MealDetails.vue";
+import ProfileSection from './components/shared/ProfileSection.vue';
 
 
 
@@ -61,8 +63,9 @@ export default {
     InfinitySliderCarousel,
     SearchBar,
     MealsList,
-    MealDetails
-  },
+    MealDetails,
+    ProfileSection
+},
   data() {
     return {
       details: false,
@@ -150,4 +153,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.header__wrapper {
+  position: sticky; 
+  top: 0; 
+  width: 100%;
+  background-color: var(--white);
+  z-index: var(--for-header);
+}
+</style>
