@@ -2,13 +2,18 @@
   <div class="search d-flex">
     <div class="search__wrapper d-flex">
       <div class="search__item d-flex align-items-center">
-        <label class="search__input" v-show="searchInputState" for="">
-          <input class="search__input-item" 
-          placeholder="Search recipe..."
-          @input="search" type="text" 
-          @keyup.enter="showFullList" />
-        </label>
-        <img class="search__icon" @click="showSearchInput" src="@/assets/img/search.svg" alt="" />
+        <Transition name="slide-fade">
+          <label class="search__input" v-if="searchInputState" for="">
+           
+              <input class="search__input-item" 
+              placeholder="Search recipe..."
+              @input="search" type="text" 
+              @keyup.enter="showFullList" />
+         
+          </label>
+        </Transition>
+          <img class="search__icon" @click="showSearchInput" src="@/assets/img/search.svg" alt="" />
+     
       </div>
 
       <div class="recipes__searched-list scroll-list d-flex flex-column" v-show="query">
@@ -78,17 +83,33 @@ export default ({
 </script>
 
 <style scoped>
+.slide-fade-enter-active {
+  transition: all 0.8s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+
+
 .search {
   gap: 15px;
 }
-
 .search__input-item {
-  width: 525px;
+  /* width: 525px; */
   height: 45px;
   padding: 6px 10px;
   background-color: transparent;
   border: 1px solid var(--secondary);
   border-radius: 10px;
+  transition: 1s cubic-bezier(0, 0, 1, 1) 500ms;
 }
 
 input[type="text"].search__input-item {
