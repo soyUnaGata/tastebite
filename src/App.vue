@@ -69,7 +69,7 @@ export default {
   data() {
     return {
       details: false,
-      meal: [],
+      meal: {},
       meals: [],
       imagesUrl: [],
       query: '',
@@ -81,55 +81,7 @@ export default {
       if(this.meals.length){
         this.details = false;
       }
-    },
-    'meal': async function(newMealValue){
-      if(newMealValue){
-        this.query = new URLSearchParams(location.search).get('search');
-    
-
-    if(this.query){
-      this.meals = await SearchService.search(this.query);
     }
-    else{
-      this.details = true;
-      this.mealId = new URLSearchParams(location.search).get('meal');
-      this.meal = await MealService.search(this.mealId);
-    }
-      }
-    },
-    'details': async function(){
-      this.query = new URLSearchParams(location.search).get('search');
-    
-
-    if(this.query){
-      this.meals = await SearchService.search(this.query);
-    }
-    else{
-      this.details = true;
-      this.mealId = new URLSearchParams(location.search).get('meal');
-      this.meal = await MealService.search(this.mealId);
-    }
-      
-    },
-  },
-  async created() {
-    this.query = new URLSearchParams(location.search).get('search');
-
-    if(this.query){
-      this.meals = await SearchService.search(this.query);
-    }
-    else{
-      this.details = true;
-      this.mealId = new URLSearchParams(location.search).get('meal');
-      this.meal = await MealService.search(this.mealId);
-    }
-  },
-  computed: {
-
-  },
-  async mounted() {
-    await this.loadImages();
-    
   },
   methods: {
     async loadImages() {
@@ -145,10 +97,33 @@ export default {
       this.details = true;
     },
     getRecipe(meal){
-      window.history.pushState(null, document.title, `${window.location.pathname}?meal=${meal}`);
+      window.history.pushState(null, document.title, `${window.location.pathname}?meal=${meal.id}`);
       this.meal = meal;
       this.details = true;
+    },
+
+    async render() {
+      this.query = new URLSearchParams(location.search).get('search');
+
+      if(this.query){
+        this.meals = await SearchService.search(this.query);
+      }
+      else{
+        this.details = true;
+        this.mealId = new URLSearchParams(location.search).get('meal');
+        this.meal = await MealService.search(this.mealId);
+      }
     }
+  },
+  async mounted() {
+    await this.loadImages();
+    window.addEventListener('popstate', this.render);
+  },  
+  unmounted() {
+    window.removeEventListener('popstate', this.render);
+  },
+  async created() {
+    await this.render();
   },
 };
 </script>

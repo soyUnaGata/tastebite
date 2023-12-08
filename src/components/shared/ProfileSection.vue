@@ -6,8 +6,8 @@
             </a>
         </li>
 
-        <div class="burger-menu__mobile d-none">
-            <div class="burger-menu__about"></div>
-        </div>
+        <ul class="profile-menu scroll-list">
+            <li class="profile-menu__item">Favorites</li>
+        </ul>
     </div>
 </template>

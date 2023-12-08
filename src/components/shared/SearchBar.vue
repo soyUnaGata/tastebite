@@ -14,9 +14,9 @@
      
       </div>
 
-      <div class="recipes__searched-list scroll-list d-flex flex-column" v-show="query">
+      <div class="recipes__searched-list scroll-list d-flex flex-column" v-show="query.length">
         <ul class="recipes__list d-flex align-items-center" v-for="recipe in meals" :key="recipe.id"
-          @click="showFullRecipe(recipe.id)">
+          @click="showFullRecipe(recipe)">
           <img class="recipes__items-image" :src="recipe.thumb" alt="">
           <li class="recipes__items">{{ recipe.meal }}</li>
         </ul>
@@ -80,7 +80,7 @@ export default ({
 })
 </script>
 
-<style scoped>
+<style>
 .slide-fade-enter-active {
   transition: all 0.8s ease-out;
 }
@@ -180,11 +180,12 @@ input[type="text"].search__input-item::placeholder {
   overflow-y: scroll;
   z-index: 89;
   position: absolute;
-  background: var(--background-elements);
+  /* background: var(--background-elements); */
+  background: var(--white);
   border-radius: 10px;
   box-shadow: 0 4px 30px rgb(0 0 0 / 10%);
-  backdrop-filter: blur(3.7px);
-  -webkit-backdrop-filter: blur(3.7px);
+  /* backdrop-filter: blur(3.7px); */
+  /* -webkit-backdrop-filter: blur(3.7px); */
   border: 1px solid rgba(255, 100, 47, 0.67);
   padding-left: 7px;
   padding-top: 10px;
