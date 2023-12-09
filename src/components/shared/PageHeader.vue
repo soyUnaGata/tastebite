@@ -58,7 +58,4 @@
   gap: 30px;
 }
 
-.account__icon {
-  width: 30px;
-}
 </style>

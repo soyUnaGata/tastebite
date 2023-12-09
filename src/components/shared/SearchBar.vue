@@ -95,13 +95,10 @@ export default ({
   opacity: 0;
 }
 
-
-
 .search {
   gap: 15px;
 }
 .search__input-item {
-  /* width: 525px; */
   height: 45px;
   padding: 6px 10px;
   background-color: transparent;
@@ -147,7 +144,7 @@ input[type="text"].search__input-item::placeholder {
 
 .recipes__searched-list {
   position: absolute;
-  transform: translateY(25%);
+  transform: translateY(15%);
   width: 350px;
   height: 350px;
   overflow-y: scroll;
