@@ -51,6 +51,9 @@ export default ({
   methods: {
     showSearchInput() {
       this.searchInputState = !this.searchInputState;
+      if(this.searchInputState == false){
+        this.query = '';
+      }
     },
 
     search: debounce(async function (e) {
