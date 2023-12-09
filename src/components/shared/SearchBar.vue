@@ -45,32 +45,27 @@ export default ({
       meals: [],
     }
   },
-  // watch: {
-  //   'query': function () {
-  //    if(){
-  //     this.cleanSearch()
-  //    }
-  //     // if (!this.searchInputState){
-  //     //   this.query = '';
-  //     //   console.log(this.query)
-  //     // }
-  //   // console.log(this.query)
-  //   }
-  // },
   computed: {
   },
   methods: {
     showSearchInput() {
-      this.searchInputState = !this.searchInputState;
       if(this.searchInputState == false){
         this.query = '';
       }
+
+      if(this.query.length > 0){
+        this.showFullList();
+      }
+      else{
+        this.searchInputState = !this.searchInputState;
+      }
+
     },
 
     search: debounce(async function (e) {
       this.meals = await SearchService.search(this.query);
       if (e.keyCode === 13) {
-        this.query = ''
+        this.query = '';
       }
     }, 500),
 
@@ -88,7 +83,6 @@ export default ({
     },
 
     cleanSearch(){
-
       this.query = '';
     }
   },
