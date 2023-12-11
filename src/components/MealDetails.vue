@@ -3,8 +3,7 @@
         <nav class="meal__navigation m-top-50">
             <ul class="d-flex align-items-center justify-content-between">
                 <li><return-button @click="back" /></li>
-                <li><bookmark-icon @click="toogleFavorites(meal)" :favorited="favorited" />
-                   <!-- :class="[selectedMeal ? 'added' : 'not-added']" -->
+                <li><bookmark-button @click="toogleFavorites(meal)" :favorited="favorited" />
                 </li>
             </ul>
         </nav>
@@ -62,14 +61,14 @@
 <script>
 import ShowButton from './shared/ShowButton.vue';
 import ReturnButton from './shared/ReturnButton.vue';
-import BookmarkIcon from './shared/BookmarkIcon.vue';
+import BookmarkButton from './shared/BookmarkButton.vue';
 import FavoritesMeals from '@/services/favorites-meals.js'
 
 export default {
     components: {
         ShowButton,
         ReturnButton,
-        BookmarkIcon
+        BookmarkButton
     },
     props: {
         meal: {
@@ -114,10 +113,10 @@ export default {
             history.back();
         },
 
-        toogleFavorites(meal){
-            if(FavoritesMeals.exists(meal)){
+        toogleFavorites(meal) {
+            if (FavoritesMeals.exists(meal)) {
                 FavoritesMeals.remove(meal);
-            }else{
+            } else {
                 FavoritesMeals.add(meal);
             }
 
@@ -130,7 +129,7 @@ export default {
             return this.formatTextToHTML(this.meal.instructions)
         }
     },
-    mounted(){
+    mounted() {
         this.favorited = FavoritesMeals.exists(this.meal);
     }
 }
@@ -246,4 +245,5 @@ export default {
 
 .meal__description-text {
     font-size: 20px;
-}</style>
+}
+</style>
