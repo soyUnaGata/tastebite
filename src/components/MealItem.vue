@@ -1,30 +1,21 @@
 <template>
-  <div class="recipe__card d-flex flex-column">
-    <img class="recipe__img" :src="mealImg" alt="">
+  <a :href="`/meal/${meal.id}`" class="recipe__card d-flex flex-column">
+    <img class="recipe__img" :src="meal.thumb" alt="">
     <div class="recipe__about d-flex flex-column">
-      <p class="recipe__category">{{ category }},
-        <span class="recipe__area">{{ area }}</span>
+      <p class="recipe__category">{{ meal.category }},
+        <span class="recipe__area">{{ meal.area }}</span>
       </p>
-      <h3 class="recipe__headline">{{ meal }}</h3>
+      <h3 class="recipe__headline">{{ meal.meal }}</h3>
     </div>
-  </div>
+  </a>
 </template>
 
 <script>
 
 export default ({
   props: {
-    mealImg: {
-      type: String,
-    },
-    category: {
-      type: String
-    },
-    area: {
-      type: String
-    },
     meal: {
-      type: String
+      type: Object
     },
   },
 })

@@ -15,7 +15,6 @@ import InfinitySliderCarousel from '@/components/InfinitySliderCarousel.vue';
 import ImagesService from '@/services/images-service';
 import SearchBar from '@/components/shared/SearchBar.vue';
 import SearchService from "@/services/search-service.js";
-import MealService from "@/services/meal-service";
 import ProfileSection from './components/shared/ProfileSection.vue';
 
 
@@ -73,7 +72,7 @@ export default {
       else {
         this.details = true;
         this.mealId = new URLSearchParams(location.search).get('meal');
-        this.meal = await MealService.search(this.mealId);
+        // this.meal = await MealService.search(this.mealId);
       }
     },
 

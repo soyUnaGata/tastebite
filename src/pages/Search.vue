@@ -3,20 +3,18 @@
 <template>
     <div class="recipes__list">
         <div class="recipes__list-filterd container">
-            <meals-list :query="query" v-for="meal in meals" :key="meal.id" :mealImg="meal.thumb" :category="meal.category"
-                :area="meal.area" :meal="meal.meal"
-                @click="$router.push({ name: 'meal-details', params: { id: meal.id } })" />
+            <meal-item v-for="meal in meals" :key="meal.id" :meal="meal" />
         </div>
     </div>
 </template>
 
 <script>
-import MealsList from '@/components/MealsList.vue';
+import MealItem from '@/components/MealItem.vue';
 import SearchService from "@/services/search-service.js";
 
 export default {
     components: {
-        MealsList
+        MealItem
     },
     data() {
         return {
