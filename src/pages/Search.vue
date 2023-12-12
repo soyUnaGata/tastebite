@@ -3,8 +3,9 @@
 <template>
     <div class="recipes__list">
         <div class="recipes__list-filterd container">
-            <MealsList :query="query" v-for="meal in meals" :key="meal.id" :mealImg="meal.thumb" :category="meal.category"
-                :area="meal.area" :meal="meal.meal" />
+            <meals-list :query="query" v-for="meal in meals" :key="meal.id" :mealImg="meal.thumb" :category="meal.category"
+                :area="meal.area" :meal="meal.meal"
+                @click="$router.push({ name: 'meal-details', params: { id: meal.id } })" />
         </div>
     </div>
 </template>

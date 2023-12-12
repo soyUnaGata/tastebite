@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import MealsListFavorite from "@/pages/MealsListFavorite.vue";
 import HomePage from "@/pages/HomePage.vue";
 import Search from "@/pages/Search.vue";
-import MealDetails from "@/components/MealDetails.vue";
+import MealItemDetails from "@/pages/MealItemDetails.vue";
 // import RecipeItemDetails from '../pages/RecipeItemDetails.vue'
 // import { App } from 'vue';
 
@@ -20,7 +20,7 @@ const routes = [
   {
     path: "/meal/:id",
     name: "meal-details",
-    component: MealDetails,
+    component: MealItemDetails,
   },
 
   {
