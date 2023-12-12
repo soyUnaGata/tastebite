@@ -1,11 +1,5 @@
 <template>
-    <div class="header__wrapper d-flex">
-        <page-header/>
-        <!-- <search-bar/> -->
-    </div>
-    
-
-    <div class="main container">
+  <div class="main container">
     <div class="headline">
       <h1>
         Recipe
@@ -33,9 +27,6 @@
       />
     </div> -->
   </div>
-
-  <recipes-serched-list/>
-
 </template>
 
 <script>
@@ -43,30 +34,29 @@ import PageHeader from '@/components/shared/PageHeader.vue';
 import InfinitySliderCarousel from '@/components/InfinitySliderCarousel.vue';
 import ImagesService from '@/services/images-service';
 import SearchBar from '@/components/shared/SearchBar.vue';
-import RecipesSerchedList from '@/components/RecipesSerchedList.vue';
 
-export default({
-    components: {
+
+export default ({
+  components: {
     PageHeader,
     InfinitySliderCarousel,
     SearchBar,
-    RecipesSerchedList
-},
-    data(){
-        return {
-            imagesUrl: [],
-        }
-    },
-    computed:{},
-    methods:{
-        async loadImages(){
-            const response = await ImagesService.getAllImages();
-            this.imagesUrl =  response.map((meal) => meal.thumb);
-        }
-    },
-    async mounted(){
-        await this.loadImages();
-    },
+  },
+  data() {
+    return {
+      imagesUrl: [],
+    }
+  },
+  computed: {},
+  methods: {
+    async loadImages() {
+      const response = await ImagesService.getAllImages();
+      this.imagesUrl = response.map((meal) => meal.thumb);
+    }
+  },
+  async mounted() {
+    await this.loadImages();
+  },
 })
 </script>
 
@@ -75,12 +65,14 @@ export default({
   max-width: 1240px;
   margin: 0 auto;
 }
+
 .main {
   display: flex;
   justify-content: space-between;
   height: 650px;
   overflow: hidden;
 }
+
 .image-carousel {
   display: flex;
   gap: 35px;

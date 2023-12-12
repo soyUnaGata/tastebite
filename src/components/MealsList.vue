@@ -1,77 +1,36 @@
 <template>
-  <div class="container recipes__list">
-    <div class="recipes__list-filterd container">
-      <div class="recipe__card d-flex flex-column" 
-      v-for="meal in meals"
-      @click="showRecipe(meal)"
-      >
-        <img class="recipe__img" :src="meal.thumb" alt="">
-        <div class="recipe__about d-flex flex-column">
-          <p class="recipe__category">{{ meal.category }},
-            <span class="recipe__area">{{ meal.area }}</span>
-          </p>
-          <h3 class="recipe__headline">{{ meal.meal }}</h3>
-        </div>
-      </div>
+  <div class="recipe__card d-flex flex-column">
+    <img class="recipe__img" :src="mealImg" alt="">
+    <div class="recipe__about d-flex flex-column">
+      <p class="recipe__category">{{ category }},
+        <span class="recipe__area">{{ area }}</span>
+      </p>
+      <h3 class="recipe__headline">{{ meal }}</h3>
     </div>
   </div>
 </template>
 
 <script>
-import PageHeader from '@/components/shared/PageHeader.vue';
-import SearchBar from '@/components/shared/SearchBar.vue';
-
 
 export default ({
-  props:{
-    meals: {
-      type: Array
-    }
-  },
-  components: {
-    PageHeader,
-    SearchBar,
-  },
-  // created(){
-  //   const windowData = Object.fromEntries(new URL(window.location).searchParams.entries());
-  //   if(windowData.search){
-  //     console.log(windowData.search)
-  //     console.log(this.$store.getters.uptadetRecipes)
-  //     // this.$store.getters.uptadetRecipes = windowData.search;
-  //   }
-  // },
-  watch:{
-    'meals.length': function(val) {
-      // console.log(this.meals.map(x => x.instructions))
-      // window.history.pushState(null, document.title, `${window.location.pathname}?search=${val}`)
-    }
-  },
-  computed: {
-    searchedRecipe() {
-      return this.$store.getters.uptadetRecipes;
+  props: {
+    mealImg: {
+      type: String,
+    },
+    category: {
+      type: String
+    },
+    area: {
+      type: String
+    },
+    meal: {
+      type: String
     },
   },
-  methods:{
-    showRecipe(meal){
-      this.$emit('show-meal-recipe', meal);
-    }
-  },
-  async mounted(){
-    // await this.SearchService();
-  }
 })
 </script>
 
 <style scoped>
-.recipes__list {
-  margin-top: 50px;
-}
-.recipes__list-filterd {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 30px;
-}
-
 .recipe__card {
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -93,6 +52,7 @@ export default ({
   gap: 10px;
   padding: 15px;
 }
+
 .recipe__headline {
   white-space: nowrap;
   overflow: hidden;
@@ -104,4 +64,5 @@ export default ({
   overflow: visible;
   text-overflow: initial;
   padding-bottom: 10px;
-}</style>
+}
+</style>
