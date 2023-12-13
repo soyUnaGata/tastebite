@@ -8,8 +8,23 @@
         </nav>
         <div class="separator m-top-30"></div>
 
-        <div class="main">
+        <div class="general__favorites m-top-15">
+            <p class="general__favorites-title"> Adedd:
+                <span>
+                    {{ favorites.length }}
+                </span>
+            </p>
 
+            <p>
+                <input type="checkbox" @input="isSelected">
+            </p>
+        </div>
+
+        <div class="main m-top-15">
+            <div class="favorite__card" v-for="meal in favorites">
+                <meal-item :meal="meal" />
+                <div class="select__recipe"></div>
+            </div>
         </div>
 
     </div>
@@ -17,15 +32,18 @@
 
 <script>
 import FavoritesMeals from '@/services/favorites-meals.js';
-import ReturnButton from '@/components/shared/ReturnButton.vue'
+import ReturnButton from '@/components/shared/ReturnButton.vue';
+import MealItem from '@/components/MealItem.vue';
 
 export default {
     components: {
-        ReturnButton
+        ReturnButton,
+        MealItem
     },
     data() {
         return {
             favorites: [],
+            selected: false,
         }
     },
     mounted() {
@@ -35,6 +53,10 @@ export default {
     methods: {
         back() {
             history.back();
+        },
+        isSelected() {
+            this.selected = !this.selected;
+            console.log(this.selected)
         }
     }
 }
@@ -48,5 +70,25 @@ export default {
 .separator {
     width: 100%;
     border: 1px solid var(--primary);
+}
+
+.general__favorites-title>span {
+    font-weight: 600;
+}
+
+.headline {
+    font-size: 45px;
+}
+
+.favorite__card {
+    position: relative;
+}
+
+.select__recipe {
+    background-color: blueviolet;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 0;
 }
 </style>
