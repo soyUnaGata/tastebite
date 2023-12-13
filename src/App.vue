@@ -24,6 +24,7 @@ export default {
     PageHeader,
     InfinitySliderCarousel,
     SearchBar,
+    ProfileSection
 
   },
   data() {

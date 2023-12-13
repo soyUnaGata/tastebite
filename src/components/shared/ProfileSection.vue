@@ -9,7 +9,9 @@
       </a>
 
       <ul class="profile-menu dropdown-content scroll-list">
-        <li class="profile-menu__item" @click="$router.push('/favorites')">Favorites</li>
+        <a :href="'/favorites'">
+          <li class="profile-menu__item">Favorites</li>
+        </a>
         <li class="profile-menu__item">Favorites</li>
         <li class="profile-menu__item">Favorites</li>
         <li class="profile-menu__item">Favorites</li>

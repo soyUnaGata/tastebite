@@ -1,5 +1,5 @@
 <template>
-    <div class="container" ref="details">
+    <div class="container">
         <nav class="meal__navigation m-top-50">
             <ul class="d-flex align-items-center justify-content-between">
                 <li><return-button @click="back" /></li>

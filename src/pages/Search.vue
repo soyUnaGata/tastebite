@@ -1,5 +1,3 @@
-
-
 <template>
     <div class="recipes__list">
         <div class="recipes__list-filterd container">

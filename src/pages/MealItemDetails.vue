@@ -24,8 +24,5 @@ export default {
             this.meal = await MealService.search(mealId);
         }
     },
-    mounted() {
-        // location.href = this.$route.params.id;
-    }
 }
 </script>
