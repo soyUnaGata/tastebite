@@ -11,9 +11,9 @@
                     <limited-text :text="meal.instructions" :limit="300" />
                 </div>
 
-                <div class="manage__button">
+                <div class="manage__button d-flex align-items-center g-20">
                     <a :href="`/meal/${meal.id}`" class="show__full-btn">Show Full Recipe</a>
-                    <button type="button" @click="handleChangeMeal">Get Another Recipe</button>
+                    <button type="button" @click="handleChangeMeal" class="handle__meal">Get Another Recipe</button>
                 </div>
             </div>
 
@@ -65,7 +65,21 @@ export default ({
     font-size: 50px;
 }
 
+.manage__button {
+    font-size: 18px;
+}
+
 .show__full-btn {
     text-decoration: underline;
+}
+
+.handle__meal {
+    border-radius: 15px;
+    padding: 10px;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid var(--secondary);
+    background-color: var(--secondary);
+    color: var(--white);
 }
 </style>
