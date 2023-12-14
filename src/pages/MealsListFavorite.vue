@@ -20,7 +20,7 @@
             </p>
         </div>
 
-        <div class="main m-top-15">
+        <div class="main__favorite  m-top-15">
             <div class="favorite__card" v-for="meal in favorites">
                 <meal-item :meal="meal" />
                 <div class="select__recipe"></div>
@@ -90,5 +90,11 @@ export default {
     height: 200px;
     position: absolute;
     top: 0;
+}
+
+.main__favorite {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
 }
 </style>
