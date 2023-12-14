@@ -15,7 +15,7 @@
     </div>
 
     <div class="meal__day">
-      <random-meal :random-meal="randomMeal" />
+      <random-meal :random-meal="randomMeal" @change-meal="getRandomMeal" />
     </div>
   </div>
 </template>

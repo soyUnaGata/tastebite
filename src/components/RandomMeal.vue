@@ -13,7 +13,7 @@
 
                 <div class="manage__button">
                     <a :href="`/meal/${meal.id}`" class="show__full-btn">Show Full Recipe</a>
-                    <button type="button" @click=""></button>
+                    <button type="button" @click="handleChangeMeal">Get Another Recipe</button>
                 </div>
             </div>
 
@@ -33,6 +33,11 @@ export default ({
     },
     components: {
         LimitedText
+    },
+    methods: {
+        handleChangeMeal() {
+            this.$emit('change-meal');
+        }
     },
     mounted() {
         this.randomMeal;
