@@ -1,9 +1,9 @@
 <template>
-    <a :href="`/meal/${category.category}`" class="category__card d-flex flex-column">
+    <a :href="`/categories/${category.category}`" class="category__card d-flex flex-column">
         <img class="category__img" :src="category.img" alt="">
         <div class="category__about d-flex flex-column align-items-center">
             <h3 class="category__category">{{ category.category }} </h3>
-            <p class="category__description">{{ category.description }}</p>
+            <p class="category__description">{{ category.description.replace(/\[\d+\]/g, '').replace(/\[\w+\]/g, '') }}</p>
         </div>
     </a>
 </template>

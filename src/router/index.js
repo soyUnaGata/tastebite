@@ -3,7 +3,8 @@ import MealsListFavorite from "@/pages/MealsListFavorite.vue";
 import HomePage from "@/pages/HomePage.vue";
 import Search from "@/pages/Search.vue";
 import MealItemDetails from "@/pages/MealItemDetails.vue";
-import MealsCategories from "@/pages/MealsCategories.vue";
+import MealsAllCategories from "@/pages/MealsAllCategories.vue";
+import MealsInCategory from "@/components/MealsInCategory.vue";
 // import RecipeItemDetails from '../pages/RecipeItemDetails.vue'
 // import { App } from 'vue';
 
@@ -33,7 +34,13 @@ const routes = [
   {
     path: "/categories",
     name: "categories",
-    component: MealsCategories,
+    component: MealsAllCategories,
+  },
+
+  {
+    path: "/categories/:category",
+    name: "category",
+    component: MealsInCategory,
   },
   //   {
   //     path: '/recipes/results',

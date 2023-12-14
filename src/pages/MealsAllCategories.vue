@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CategoryService from '@/services/category-service';
+import CategoryService from '@/services/category-service.js';
 import CategoryItem from '@/components/CategoryItem.vue';
 
 export default ({

@@ -15,6 +15,20 @@ class CategoryService {
         }));
       });
   }
+
+  async getCategory(category) {
+    return await api
+      .get(`filter.php?c=${category}`)
+      .then((response) => response.data)
+      .then((response) => {
+        if (!response.meals) return [];
+        return response.meals.map((meal) => ({
+          id: meal.idMeal,
+          meal: meal.strMeal,
+          thumb: meal.strMealThumb,
+        }));
+      });
+  }
 }
 
 export default new CategoryService();

@@ -2,7 +2,7 @@
     <div class="d-flex w-100">
         <div class="header__inner d-flex align-items-center">
             <a :href="'/'">
-                <logo-company />
+                <logo-company @click="$router.push('/')" />
             </a>
 
             <nav class="menu">
