@@ -5,10 +5,19 @@
                 <img class="random__meal-img" :src="meal.thumb" :alt="meal.meal">
             </div>
 
-            <div class="random__meal-description d-flex flex-column justify-content-center align-items-center w-100">
-                <h2 class="random__meal-header">{{ meal.meal }}</h2>
-                <limited-text :text="meal.instructions" :limit="300" />
+            <div class="random__meal-description d-flex flex-column justify-content-center align-items-center g-20 w-100">
+                <div class="d-flex flex-column align-items-center justify-content-center g-20">
+                    <h2 class="random__meal-header">{{ meal.meal }}</h2>
+                    <limited-text :text="meal.instructions" :limit="300" />
+                </div>
+
+                <div class="manage__button">
+                    <a :href="`/meal/${meal.id}`" class="show__full-btn">Show Full Recipe</a>
+                    <button type="button" @click=""></button>
+                </div>
             </div>
+
+
         </div>
     </div>
 </template>
@@ -34,6 +43,7 @@ export default ({
 <style scoped>
 .random__meal-main {
     background-color: var(--secondary-light);
+    color: var(--headlines);
 }
 
 .random__meal-details {
@@ -47,6 +57,10 @@ export default ({
 }
 
 .random__meal-header {
-    font-size: 32px;
+    font-size: 50px;
+}
+
+.show__full-btn {
+    text-decoration: underline;
 }
 </style>

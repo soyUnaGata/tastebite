@@ -36,11 +36,7 @@ export default {
 
 <style>
 .description {
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 400;
-}
-
-.description>span {
-    cursor: pointer;
 }
 </style>
