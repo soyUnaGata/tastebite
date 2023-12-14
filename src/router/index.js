@@ -3,6 +3,7 @@ import MealsListFavorite from "@/pages/MealsListFavorite.vue";
 import HomePage from "@/pages/HomePage.vue";
 import Search from "@/pages/Search.vue";
 import MealItemDetails from "@/pages/MealItemDetails.vue";
+import MealsCategories from "@/pages/MealsCategories.vue";
 // import RecipeItemDetails from '../pages/RecipeItemDetails.vue'
 // import { App } from 'vue';
 
@@ -27,6 +28,12 @@ const routes = [
     path: "/favorites",
     name: "favorites",
     component: MealsListFavorite,
+  },
+
+  {
+    path: "/categories",
+    name: "categories",
+    component: MealsCategories,
   },
   //   {
   //     path: '/recipes/results',

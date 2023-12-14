@@ -11,7 +11,7 @@
                         <a class="menu__list-link" :href="'/'">Homepage</a>
                     </li>
                     <li class="menu__list-item">
-                        <a class="menu__list-link" href="">Reciepe Page</a>
+                        <a class="menu__list-link" :href="'/categories'">Categories</a>
                     </li>
                     <li class="menu__list-item">
                         <a class="menu__list-link" href="">Pages</a>

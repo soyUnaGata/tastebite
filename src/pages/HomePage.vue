@@ -34,6 +34,8 @@ import PageHeader from '@/components/shared/PageHeader.vue';
 import InfinitySliderCarousel from '@/components/InfinitySliderCarousel.vue';
 import ImagesService from '@/services/images-service';
 import SearchBar from '@/components/shared/SearchBar.vue';
+import IngridientsService from '@/services/ingridients-service.js';
+import api from "@/services/api";
 
 
 export default ({
@@ -45,6 +47,8 @@ export default ({
   data() {
     return {
       imagesUrl: [],
+      ingridients: [],
+      categories: [],
     }
   },
   computed: {},
@@ -52,10 +56,27 @@ export default ({
     async loadImages() {
       const response = await ImagesService.getAllImages();
       this.imagesUrl = response.map((meal) => meal.thumb);
-    }
+    },
+    async getIngridients() {
+      // this.ingridients = await IngridientsService.getAllIngridients();
+
+      this.ingridients = await api
+        .get("list.php?i=list")
+        .then((response) => response.data)
+        .then((response) => {
+          if (!response.meals) return [];
+          return response.meals.map((meal) => ({
+            id: meal.idIngredient,
+            description: meal.strDescription,
+            ingridient: meal.strIngredient,
+            ingridientImg: api + `ingredients/${this.ingridient}`,
+          }));
+        });
+    },
   },
   async mounted() {
     await this.loadImages();
+    await this.getIngridients();
   },
 })
 </script>
