@@ -4,7 +4,7 @@
         <div class="category__meal-item">
             <div class="category__meal m-top-30" v-for="meal in meals">
                 <a :href="`/meal/${meal.id}`" class="category__card d-flex flex-column">
-                    <img class="category__img" :src="meal.thumb" alt="">
+                    <img class="category__img" :src="meal.thumb" :alt="meal.thumb">
                     <div class="category__about d-flex flex-column align-items-center">
                         <h3 class="category__category">{{ meal.meal }} </h3>
                     </div>

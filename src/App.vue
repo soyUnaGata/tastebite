@@ -1,8 +1,11 @@
 <template>
-  <div class="header__wrapper container d-flex g-10 align-items-center ">
-    <page-header />
-    <search-bar @list-of-meals="getListOfMeals" @show-full-recipe="getRecipe" />
-    <profile-section />
+  <div class="header__wrapper d-flex g-10 align-items-center">
+    <div class="container d-flex g-10 align-items-center w-100">
+      <page-header />
+      <search-bar @list-of-meals="getListOfMeals" @show-full-recipe="getRecipe" />
+      <profile-section />
+    </div>
+
   </div>
 
   <router-view></router-view>
