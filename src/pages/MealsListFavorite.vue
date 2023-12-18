@@ -14,19 +14,22 @@
                     {{ favorites.length }}
                 </span>
             </p>
-
-            <p>
-                <input type="checkbox" @input="isSelected">
-            </p>
         </div>
 
         <div class="main__favorite  m-top-15">
             <div class="favorite__card" v-for="meal in favorites">
-                <meal-item :meal="meal" />
-                <div class="select__recipe"></div>
+                <div class="select__recipe">
+                    <meal-item :meal="meal" />
+                    <button class="change__recipe-state" type="button" @click="deleteFavorite(meal)">
+                        <svg class="change__recipe-delete" xmlns="http://www.w3.org/2000/svg" height="24"
+                            viewBox="0 -960 960 960" width="24">
+                            <path
+                                d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -43,7 +46,6 @@ export default {
     data() {
         return {
             favorites: [],
-            selected: false,
         }
     },
     mounted() {
@@ -54,10 +56,13 @@ export default {
         back() {
             history.back();
         },
-        isSelected() {
-            this.selected = !this.selected;
-            console.log(this.selected)
+
+        deleteFavorite(value) {
+            FavoritesMeals.remove(value);
+            console.log(value)
+            this.favorites = FavoritesMeals.getAll();
         }
+
     }
 }
 </script>
@@ -80,21 +85,28 @@ export default {
     font-size: 45px;
 }
 
-.favorite__card {
+.select__recipe {
     position: relative;
 }
 
-.select__recipe {
-    background-color: blueviolet;
-    width: 200px;
-    height: 200px;
+.change__recipe-state {
     position: absolute;
-    top: 0;
+    bottom: 13px;
+    right: 12px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    z-index: var(--for-remove-recipe);
 }
 
 .main__favorite {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
+}
+
+.change__recipe-delete {
+    fill: var(--danger-color);
 }
 </style>
