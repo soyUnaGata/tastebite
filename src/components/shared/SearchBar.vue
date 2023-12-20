@@ -19,7 +19,7 @@
 
       </div>
 
-      <div class="recipes__searched-list scroll-list d-flex flex-column" v-show="query.length">
+      <div class="recipes__searched-list scroll-list d-flex flex-column" v-if="meals.length !== 0" v-show="query.length">
         <ul class="recipes__list d-flex align-items-center" v-for="recipe in meals" :key="recipe.id"
           @click="showFullRecipe(recipe)">
           <img class="recipes__items-image" :src="recipe.thumb" alt="">
@@ -64,6 +64,8 @@ export default ({
       if (e.keyCode === 13) {
         this.query = '';
       }
+
+      if (this.meals.length == 0) return;
     }, 500),
 
     // showFullList() {
