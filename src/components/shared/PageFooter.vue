@@ -34,7 +34,7 @@
                                 </label>
                             </form>
                         </li>
-                        <button type="button">Subscribe</button>
+                        <button class="subscribe__btn" type="button">Join</button>
                     </ul>
                 </nav>
             </div>
@@ -104,5 +104,20 @@ export default ({
     top: 10px;
     left: 21px;
     fill: var(--primary);
+}
+
+.subscribe__btn {
+    padding: 15px 10px;
+    font-size: 20px;
+    background-color: var(--secondary);
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 100%;
+    border-radius: 100px;
+    color: var(--white);
+    letter-spacing: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
 </style>
