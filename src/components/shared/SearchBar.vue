@@ -68,14 +68,8 @@ export default ({
       if (this.meals.length == 0) return;
     }, 500),
 
-    // showFullList() {
-    //   window.history.pushState(null, document.title, `${window.location.pathname}?search=${this.query}`);
-    //   this.$emit('list-of-meals', this.meals);
-    //   this.searchInputState = false;
-    //   this.query = '';
-    // },
-
     showFullList() {
+      if (this.meals.length == 0) return;
       this.$router.push({ name: 'search', params: { query: this.query } })
       this.searchInputState = false;
       this.query = '';
