@@ -1,16 +1,20 @@
 <template>
-  <div class="header__wrapper d-flex g-10 align-items-center">
-    <div class="container d-flex g-10 align-items-center w-100">
-      <page-header />
-      <search-bar @list-of-meals="getListOfMeals" @show-full-recipe="getRecipe" />
-      <profile-section />
+  <div class="wrapper d-flex flex-column">
+    <div class="header__wrapper d-flex g-10 align-items-center">
+      <div class="container d-flex g-10 align-items-center w-100">
+        <page-header />
+        <search-bar @list-of-meals="getListOfMeals" @show-full-recipe="getRecipe" />
+        <profile-section />
+      </div>
     </div>
-  </div>
+    <div class="main">
+      <router-view></router-view>
+    </div>
 
-  <router-view></router-view>
 
-  <div class="footer__wrapper">
-    <page-footer />
+    <div class="footer__wrapper m-top-50">
+      <page-footer />
+    </div>
   </div>
 </template>
 
@@ -104,6 +108,14 @@ export default {
 </script>
 
 <style>
+.wrapper {
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+}
+
 .header__wrapper {
   position: sticky;
   top: 0;
@@ -115,5 +127,6 @@ export default {
 .footer__wrapper {
   width: 100%;
   background-color: var(--light-gray);
+  flex-shrink: 0;
 }
 </style>

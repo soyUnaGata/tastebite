@@ -1,5 +1,5 @@
 <template>
-  <div class="main container">
+  <div class="container">
     <div class="main__section">
       <div class="headline d-flex flex-column justify-content-center g-20">
         <div class="headline__items">

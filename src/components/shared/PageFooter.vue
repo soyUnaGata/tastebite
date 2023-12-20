@@ -1,5 +1,5 @@
 <template>
-    <div class="footer__inner container">
+    <footer class="footer__inner container">
         <div class="logo__section d-flex align-items-center justify-content-between">
 
             <div class="copyrights d-flex flex-column g-20">
@@ -41,7 +41,7 @@
         </div>
 
 
-    </div>
+    </footer>
 </template>
 
 <script>

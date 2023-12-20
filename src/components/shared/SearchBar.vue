@@ -75,7 +75,6 @@ export default ({
 
     showFullList() {
       this.$router.push({ name: 'search', params: { query: this.query } })
-      // this.$emit('list-of-meals', this.meals);
       this.searchInputState = false;
       this.query = '';
     },
