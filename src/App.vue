@@ -5,15 +5,19 @@
       <search-bar @list-of-meals="getListOfMeals" @show-full-recipe="getRecipe" />
       <profile-section />
     </div>
-
   </div>
 
   <router-view></router-view>
+
+  <div class="footer__wrapper">
+    <page-footer />
+  </div>
 </template>
 
 <script>
 import { RouterView } from "vue-router";
 import PageHeader from '@/components/shared/PageHeader.vue';
+import PageFooter from '@/components/shared/PageFooter.vue';
 import InfinitySliderCarousel from '@/components/InfinitySliderCarousel.vue';
 import ImagesService from '@/services/images-service';
 import SearchBar from '@/components/shared/SearchBar.vue';
@@ -27,7 +31,8 @@ export default {
     PageHeader,
     InfinitySliderCarousel,
     SearchBar,
-    ProfileSection
+    ProfileSection,
+    PageFooter
 
   },
   data() {
@@ -105,5 +110,10 @@ export default {
   width: 100%;
   background-color: var(--white);
   z-index: var(--for-header);
+}
+
+.footer__wrapper {
+  width: 100%;
+  background-color: var(--light-gray);
 }
 </style>

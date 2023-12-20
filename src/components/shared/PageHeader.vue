@@ -16,9 +16,6 @@
                     <li class="menu__list-item">
                         <a class="menu__list-link" href="">Pages</a>
                     </li>
-                    <!-- <li class="menu__list-item">
-                        <a class="menu__list-link" href="">Buy</a>
-                    </li> -->
                 </ul>
             </nav>
         </div>

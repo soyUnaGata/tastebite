@@ -18,9 +18,9 @@
       </div> -->
     </div>
 
-    <div class="meal__day m-top-50 ">
+    <!-- <div class="meal__day m-top-50 ">
       <random-meal :random-meal="randomMeal" @change-meal="getRandomMeal" />
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -39,7 +39,7 @@ export default ({
     PageHeader,
     InfinitySliderCarousel,
     SearchBar,
-    RandomMeal
+    RandomMeal,
   },
   data() {
     return {
