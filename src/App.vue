@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper d-flex flex-column">
     <div class="header__wrapper d-flex g-10 align-items-center">
-      <div class="container d-flex g-10 align-items-center w-100">
+      <div class="header__items container d-flex g-10 align-items-center w-100">
         <page-header />
         <search-bar />
         <profile-section />
@@ -59,5 +59,11 @@ export default {
   width: 100%;
   background-color: var(--light-gray);
   flex-shrink: 0;
+}
+
+@media (max-width: 1200px) {
+  .header__items {
+    padding: 15px 25px;
+  }
 }
 </style>
