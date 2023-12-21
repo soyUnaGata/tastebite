@@ -201,7 +201,7 @@ input[type="text"].search__input-item::placeholder {
 .scroll-list {
   overflow: hidden;
   overflow-y: scroll;
-  z-index: 89;
+  z-index: var(--for-search-scroll);
   position: absolute;
   background: var(--white);
   border-radius: 10px;
@@ -224,5 +224,21 @@ input[type="text"].search__input-item::placeholder {
   background-color: var(--secondary-light);
   height: 38px;
   border-radius: 10px;
+}
+
+@media (max-width: 992px) {
+
+  .search__input-item,
+  .recipes__searched-list {
+    width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .search__input-item,
+  .recipes__searched-list {
+    width: 350px;
+  }
 }
 </style>

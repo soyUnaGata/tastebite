@@ -57,6 +57,19 @@
   color: var(--white);
   width: 100%;
 }
+
+@media (max-width: 992px) {
+  .dropdown-content {
+    transform: translateX(-30%);
+    min-width: 100px;
+    top: 40px;
+  }
+
+  .profile__section {
+    align-items: center;
+    display: flex;
+  }
+}
 </style>
 
 

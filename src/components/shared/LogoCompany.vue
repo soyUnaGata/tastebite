@@ -27,4 +27,14 @@
     max-width: 130px;
   }
 }
+
+@media (max-width: 768px) {
+  .logo__name {
+    display: none;
+  }
+
+  .logo__dot {
+    display: none;
+  }
+}
 </style>

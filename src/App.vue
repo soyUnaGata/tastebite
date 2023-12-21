@@ -62,8 +62,17 @@ export default {
 }
 
 @media (max-width: 1200px) {
-  .header__items {
+
+  .header__items,
+  .main {
     padding: 15px 25px;
   }
 }
-</style>
+
+@media (max-width: 768px) {
+
+  .header__items,
+  .main {
+    padding: 20px 30px;
+  }
+}</style>

@@ -97,7 +97,7 @@ export default ({
         position: relative;
         width: 30px;
         height: 20px;
-        z-index: 3;
+        z-index: var(--for-burger);
     }
 
     .header__burger::before,
@@ -163,7 +163,7 @@ export default ({
 
     .menu__list {
         position: relative;
-        z-index: 2;
+        z-index: var(--for-burger);
         flex-direction: column;
         align-items: center;
     }
