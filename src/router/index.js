@@ -5,8 +5,6 @@ import Search from "@/pages/Search.vue";
 import MealItemDetails from "@/pages/MealItemDetails.vue";
 import MealsAllCategories from "@/pages/MealsAllCategories.vue";
 import MealsInCategory from "@/components/MealsInCategory.vue";
-// import RecipeItemDetails from '../pages/RecipeItemDetails.vue'
-// import { App } from 'vue';
 
 const routes = [
   {
@@ -42,16 +40,6 @@ const routes = [
     name: "category",
     component: MealsInCategory,
   },
-  //   {
-  //     path: '/recipes/results',
-  //     name: 'recipe-searched-list',
-  //     component: MealsList
-  //   },
-  //   {
-  //     path: '/recipes/:id',
-  //     name: 'recipe-details',
-  //     component: RecipeItemDetails
-  //   },
   {
     // path: '/about',
     // name: 'about',

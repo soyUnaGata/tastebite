@@ -12,36 +12,11 @@
         <a :href="'/favorites'">
           <li class="profile-menu__item">Favorites</li>
         </a>
-        <li class="profile-menu__item">Favorites</li>
-        <li class="profile-menu__item">Favorites</li>
-        <li class="profile-menu__item">Favorites</li>
-        <li class="profile-menu__item">Favorites</li>
-        <li class="profile-menu__item">Favorites</li>
-        <li class="profile-menu__item">Favorites</li>
       </ul>
     </li>
   </div>
 </template>
 
-<script>
-import FavoritesMeals from '@/services/favorites-meals.js'
-
-export default {
-  // data() {
-  //   return {
-  //     favorites: [],
-  //   }
-  // },
-  // mounted() {
-  //   this.favorites = FavoritesMeals.getAll();
-  // },
-  // methods: {
-  //   showFavorites() {
-  //     window.history.pushState(null, document.title, `${window.location.pathname}?favorites`);
-  //   }
-  // }
-}
-</script>
 
 <style>
 .dropdown {

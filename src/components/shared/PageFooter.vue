@@ -34,7 +34,7 @@
                                 </label>
                             </form>
                         </li>
-                        <button class="subscribe__btn" type="button">Join</button>
+                        <button class="subscribe__btn" type="submit">Join</button>
                     </ul>
                 </nav>
             </div>

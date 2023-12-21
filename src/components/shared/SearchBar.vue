@@ -42,8 +42,6 @@ export default ({
       meals: [],
     }
   },
-  computed: {
-  },
   methods: {
     showSearchInput() {
       if (this.searchInputState == false) {
@@ -85,9 +83,6 @@ export default ({
       this.query = '';
     }
   },
-  async mounted() {
-
-  }
 })
 </script>
 

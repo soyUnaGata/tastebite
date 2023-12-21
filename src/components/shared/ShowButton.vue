@@ -43,10 +43,6 @@ export default {
   filter: hue-rotate(225deg);
 }
 
-/* .show__video:last-child{
-  filter: hue-rotate(90deg);
-} */
-
 .show__video span {
   position: absolute;
   display: block;
@@ -129,4 +125,5 @@ export default {
   100% {
     bottom: 100%;
   }
-}</style>
+}
+</style>
