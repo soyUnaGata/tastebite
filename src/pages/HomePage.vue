@@ -11,16 +11,16 @@
           Find amazing recipes and support your favorite culinary creators.
         </p>
       </div>
-      <!-- <div class="image-carousel">
+      <div class="image-carousel">
         <infinity-slider-carousel :images="imagesUrl" :direction="'down'" :viewed-count="5" :duration="1200" />
         <infinity-slider-carousel :images="imagesUrl" :direction="'top'" :duration="1000" :viewed-count="4" />
         <infinity-slider-carousel :images="imagesUrl" :direction="'down'" :duration="950" :viewed-count="4" />
-      </div> -->
+      </div>
     </div>
 
-    <!-- <div class="meal__day m-top-50 ">
+    <div class="meal__day m-top-50 ">
       <random-meal :random-meal="randomMeal" @change-meal="getRandomMeal" />
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -118,5 +118,35 @@ export default ({
 .headline__items-subtitle {
   font-size: 20px;
   font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .main__section {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .image-carousel {
+    display: none;
+  }
+
+  .main__section {
+    justify-content: center;
+    background-image: url('../assets/img/vegan-strawberry-cake.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .headline__title,
+  .headline__subtitle {
+    color: var(--headlines);
+  }
+
+  .headline__items-subtitle {
+    color: var(--white);
+  }
+
 }
 </style>

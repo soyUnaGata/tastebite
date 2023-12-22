@@ -75,4 +75,15 @@ export default {
   .main {
     padding: 20px 30px;
   }
-}</style>
+}
+
+@media (max-width: 576px) {
+  .header__items {
+    padding: 15px;
+  }
+
+  .main {
+    padding: 0;
+  }
+}
+</style>

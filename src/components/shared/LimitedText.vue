@@ -39,4 +39,10 @@ export default {
     font-size: 24px;
     font-weight: 400;
 }
+
+@media (max-width: 768px) {
+    .description {
+        font-size: 20px;
+    }
+}
 </style>

@@ -172,4 +172,10 @@ export default ({
         margin: 0 0 20px 20px;
     }
 }
+
+@media (max-width: 576px) {
+    .menu {
+        width: 100%;
+    }
+}
 </style>

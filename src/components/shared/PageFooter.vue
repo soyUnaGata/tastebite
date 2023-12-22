@@ -120,4 +120,23 @@ export default ({
     outline: none;
     cursor: pointer;
 }
+
+@media (max-width: 768px) {
+
+    .logo__section,
+    .footer__menu {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer__subscription {
+        padding: 10px 8px;
+    }
+
+    .form__subscription-text {
+        padding: 10px 8px;
+    }
+}
 </style>

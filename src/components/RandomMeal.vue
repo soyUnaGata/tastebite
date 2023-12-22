@@ -82,4 +82,27 @@ export default ({
     background-color: var(--secondary);
     color: var(--white);
 }
+
+@media (max-width: 768px) {
+    .random__meal-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .random__meal-img {
+        height: 400px;
+    }
+
+    .random__meal-header {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .random__meal-img {
+        height: 300px;
+    }
+}
 </style>
