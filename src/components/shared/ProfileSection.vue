@@ -70,6 +70,12 @@
     display: flex;
   }
 }
+
+@media (min-width: 280px) and (max-width: 375px) {
+  .profile__section {
+    display: none;
+  }
+}
 </style>
 
 

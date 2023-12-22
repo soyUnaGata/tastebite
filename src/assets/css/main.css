@@ -83,3 +83,9 @@ a {
     max-width: 540px;
   }
 }
+
+@media (min-width: 280px) and (max-width: 375px) {
+  .container {
+    max-width: 260px;
+  }
+}

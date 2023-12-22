@@ -149,4 +149,22 @@ export default ({
   }
 
 }
+
+@media (min-width: 280px) and (max-width: 375px) {
+
+  .headline__title,
+  .headline__subtitle {
+    font-size: 35px;
+  }
+
+  .headline__items {
+    padding: 0 10px;
+  }
+
+  .headline__items-subtitle {
+    font-size: 24px;
+    display: flex;
+    padding: 0 10px;
+  }
+}
 </style>

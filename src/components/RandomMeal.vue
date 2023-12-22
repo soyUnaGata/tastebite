@@ -105,4 +105,19 @@ export default ({
         height: 300px;
     }
 }
+
+@media (min-width: 280px) and (max-width: 375px) {
+    .random__meal-img {
+        height: 250px;
+    }
+
+    .random__meal-header {
+        font-size: 30px;
+    }
+
+    .manage__button {
+        display: flex;
+        flex-direction: column;
+    }
+}
 </style>

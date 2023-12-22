@@ -252,4 +252,15 @@ input[type="text"].search__input-item::placeholder {
     width: 350px;
   }
 }
+
+@media (min-width: 280px) and (max-width: 375px) {
+  .search__input-item {
+    width: 200px;
+  }
+
+  .recipes__searched-list {
+    width: 100%;
+    left: -31px;
+  }
+}
 </style>

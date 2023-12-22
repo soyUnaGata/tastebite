@@ -139,4 +139,14 @@ export default ({
         padding: 10px 8px;
     }
 }
+
+@media (min-width: 280px) {
+    .form__label {
+        width: 100%;
+    }
+
+    .form__subscription-text {
+        width: 100%;
+    }
+}
 </style>

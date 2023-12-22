@@ -17,8 +17,8 @@
                     <li class="menu__list-item">
                         <a class="menu__list-link" :href="'/categories'">Categories</a>
                     </li>
-                    <li class="menu__list-item">
-                        <a class="menu__list-link" href="">Pages</a>
+                    <li class="menu__list-item d-none">
+                        <a class="menu__list-link" :href="'/favorites'">Favorites</a>
                     </li>
                 </ul>
             </nav>
@@ -176,6 +176,12 @@ export default ({
 @media (max-width: 576px) {
     .menu {
         width: 100%;
+    }
+}
+
+@media (min-width: 280px) and (max-width: 375px) {
+    .menu__list-item:last-child {
+        display: flex;
     }
 }
 </style>
