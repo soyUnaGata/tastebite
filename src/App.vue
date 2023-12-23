@@ -86,10 +86,4 @@ export default {
     padding: 0;
   }
 }
-
-@media (min-width: 280px) {
-  profile-section {
-    display: none;
-  }
-}
 </style>

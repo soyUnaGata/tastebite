@@ -82,7 +82,6 @@ export default {
         }
     },
     mounted() {
-
     },
     methods: {
         formatTextToHTML: function (str) {
@@ -130,6 +129,7 @@ export default {
         }
     },
     mounted() {
+
         this.favorited = FavoritesMeals.exists(this.meal);
     }
 }

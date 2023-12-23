@@ -59,7 +59,6 @@ export default {
 
         deleteFavorite(value) {
             FavoritesMeals.remove(value);
-            console.log(value)
             this.favorites = FavoritesMeals.getAll();
         }
 
