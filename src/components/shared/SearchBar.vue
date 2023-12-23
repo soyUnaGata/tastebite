@@ -21,7 +21,7 @@
 
       <div class="recipes__searched-list scroll-list d-flex flex-column" v-if="meals.length !== 0" v-show="query.length">
         <ul class="recipes__list d-flex align-items-center" v-for="recipe in meals" :key="recipe.id"
-          @click="showFullRecipe(recipe)" @touchend="console.log('clicked')">
+          @click="showFullRecipe(recipe)" @touchend="showFullRecipe(recipe)">
           <img class="recipes__items-image" :src="recipe.thumb" alt="">
           <li class="recipes__items">{{ recipe.meal }}</li>
         </ul>
@@ -75,7 +75,6 @@ export default ({
 
     showFullRecipe(meal) {
       this.$router.push({ name: 'meal-details', params: { id: meal.id } })
-      console.log('was clicked')
       this.searchInputState = false;
       this.query = '';
     },

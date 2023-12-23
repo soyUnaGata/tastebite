@@ -42,7 +42,6 @@ export default {
     },
     watch: {
         '$route.params.id': function (val) {
-            console.log(val)
             this.id = val;
         },
         id: async function () {

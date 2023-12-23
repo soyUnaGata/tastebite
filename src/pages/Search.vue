@@ -27,7 +27,6 @@ export default {
     },
     watch: {
         '$route.params.query': function (val) {
-            console.log(val)
             this.query = val;
         },
         query: async function () {
