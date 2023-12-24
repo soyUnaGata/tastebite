@@ -121,6 +121,13 @@ export default ({
     cursor: pointer;
 }
 
+@media (max-width: 992px) {
+
+    .footer__inner {
+        padding: 45px 10px;
+    }
+}
+
 @media (max-width: 768px) {
 
     .logo__section,

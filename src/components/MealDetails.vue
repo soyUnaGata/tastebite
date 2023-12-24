@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="meal__content container">
         <nav class="meal__navigation m-top-50">
             <ul class="d-flex align-items-center justify-content-between">
                 <li><return-button @click="back" /></li>
@@ -245,5 +245,63 @@ export default {
 
 .meal__description-text {
     font-size: 20px;
+}
+
+@media (max-width: 992px) {
+
+    .meal__details {
+        margin-top: 15px;
+    }
+
+    .meal__category {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .meal__navigation {
+        max-width: 100%;
+    }
+
+    .meal__header {
+        font-size: 30px;
+        margin-top: 15px;
+    }
+
+    .meal__img {
+        width: 320px;
+        height: 310px;
+    }
+}
+
+@media (max-width: 768px) {
+    .meal__content {
+        padding: 0 10px;
+    }
+
+    .meal__information {
+        flex-direction: column;
+    }
+
+}
+
+@media (max-width: 576px) {
+    .meal__ingridients {
+        align-items: center;
+    }
+}
+
+@media (min-width: 280px) and (max-width: 375px) {
+    .meal__navigation {
+        margin-top: 25px;
+    }
+
+    .meal__content {
+        padding: 0;
+    }
+
+    .meal__img {
+        width: 250px;
+        height: 230px;
+    }
 }
 </style>
