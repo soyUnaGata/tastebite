@@ -49,6 +49,12 @@ export default {
      grid-gap: 30px;
  }
 
+ @media (max-width: 1200px) {
+     .recipes__list-filterd {
+         grid-template-columns: 1fr 1fr 1fr;
+     }
+ }
+
  @media (max-width: 992px) {
      .recipes__list-filterd {
          grid-template-columns: 1fr 1fr 1fr;

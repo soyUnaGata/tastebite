@@ -33,4 +33,39 @@ export default ({
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
+
+@media (max-width: 1200px) {
+    .category {
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-top: 25px;
+    }
+}
+
+@media (max-width: 992px) {
+    .category {
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-top: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .category {
+        grid-template-columns: 1fr 1fr;
+        margin-top: 25px;
+    }
+}
+
+@media (max-width: 576px) {
+    .category {
+        grid-template-columns: 1fr;
+        margin-top: 25px;
+    }
+}
+
+@media (min-width: 280px) and (max-width: 375px) {
+    .category {
+        grid-template-columns: 1fr;
+        margin-top: 25px;
+    }
+}
 </style>

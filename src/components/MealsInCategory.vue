@@ -1,5 +1,5 @@
 <template>
-    <div class="container m-top-50">
+    <div class="category_wrapper container m-top-50">
         <return-button @click="back" />
         <div class="category__meal-item">
             <div class="category__meal m-top-30" v-for="meal in meals">
@@ -68,5 +68,85 @@ export default {
 .category__about {
     gap: 10px;
     padding: 15px;
+}
+
+@media (max-width: 1200px) {
+    .category__meal-item {
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-top: 25px;
+    }
+}
+
+@media (max-width: 992px) {
+    .category__meal-item {
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-top: 25px;
+    }
+
+    .category__card {
+        width: 240px;
+    }
+
+    .category__img {
+        height: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .category_wrapper {
+        padding: 0 15px;
+    }
+
+    .category__meal-item {
+        grid-template-columns: 1fr 1fr;
+        margin-top: 25px;
+    }
+
+    .category__card {
+        width: 240px;
+    }
+
+    .category__img {
+        height: 220px;
+    }
+}
+
+@media (max-width: 576px) {
+    .category_wrapper {
+        padding: 0 10px;
+    }
+
+    .category__meal-item {
+        grid-template-columns: 1fr;
+        margin-top: 25px;
+    }
+
+    .category__card {
+        width: 240px;
+    }
+
+    .category__img {
+        height: 220px;
+    }
+}
+
+@media (min-width: 280px) and (max-width: 375px) {
+    .category_wrapper {
+        padding: 0 10px;
+    }
+
+    .category__meal-item {
+        grid-template-columns: 1fr;
+        margin-top: 25px;
+    }
+
+    .category__card {
+        width: 240px;
+    }
+
+    .category__img {
+        height: 220px;
+    }
 }
 </style>

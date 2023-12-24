@@ -49,4 +49,47 @@ export default ({
     text-overflow: initial;
     padding-bottom: 10px;
 }
+
+@media (max-width: 992px) {
+
+    .category__card {
+        width: 240px;
+    }
+
+    .category__img {
+        height: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .category__card {
+        width: 240px;
+    }
+
+    .category__img {
+        height: 220px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .category__card {
+        width: 240px;
+    }
+
+    .category__img {
+        height: 220px;
+    }
+}
+
+@media (min-width: 280px) and (max-width: 375px) {
+    .category__card {
+        width: 240px;
+    }
+
+    .category__img {
+        height: 220px;
+    }
+}
 </style>
