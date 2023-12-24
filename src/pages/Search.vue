@@ -48,4 +48,40 @@ export default {
      grid-template-columns: 1fr 1fr 1fr 1fr;
      grid-gap: 30px;
  }
+
+ @media (max-width: 992px) {
+     .recipes__list-filterd {
+         grid-template-columns: 1fr 1fr 1fr;
+     }
+ }
+
+ @media (max-width: 768px) {
+     .recipes__list-filterd {
+         grid-template-columns: 1fr 1fr;
+     }
+
+     .recipes__list {
+         justify-content: center;
+         display: flex;
+         margin-top: 25px;
+     }
+ }
+
+ @media (max-width: 576px) {
+     .recipes__list-filterd {
+         grid-template-columns: 1fr;
+     }
+
+     .recipes__list {
+         justify-content: center;
+         display: flex;
+         margin-top: 25px;
+     }
+ }
+
+ @media (min-width: 280px) and (max-width: 375px) {
+     .recipes__list-filterd {
+         grid-template-columns: 1fr;
+     }
+ }
 </style>

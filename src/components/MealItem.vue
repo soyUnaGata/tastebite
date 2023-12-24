@@ -56,4 +56,47 @@ export default ({
   text-overflow: initial;
   padding-bottom: 10px;
 }
+
+@media (max-width: 992px) {
+
+  .recipe__card {
+    width: 240px;
+  }
+
+  .recipe__img {
+    height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .recipe__card {
+    width: 240px;
+  }
+
+  .recipe__img {
+    height: 220px;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .recipe__card {
+    width: 240px;
+  }
+
+  .recipe__img {
+    height: 220px;
+  }
+}
+
+@media (min-width: 280px) and (max-width: 375px) {
+  .recipe__card {
+    width: 240px;
+  }
+
+  .recipe__img {
+    height: 220px;
+  }
+}
 </style>
