@@ -96,7 +96,6 @@ export default {
     outline: none;
     border: none;
     background-color: transparent;
-    z-index: var(--for-remove-recipe);
 }
 
 .main__favorite {
@@ -107,5 +106,64 @@ export default {
 
 .change__recipe-delete {
     fill: var(--danger-color);
+}
+
+@media (max-width: 1200px) {
+    .main__favorite {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .main__favorite {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .main__favorite {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .favorite__card {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .main__favorite {
+        grid-template-columns: 1fr;
+    }
+
+    .favorite__card {
+        display: flex;
+        justify-content: center;
+    }
+
+    .general__favorites {
+        padding-left: 15px;
+    }
+}
+
+@media (min-width: 280px) and (max-width: 375px) {
+    .main__favorite {
+        grid-template-columns: 1fr;
+    }
+
+    .change__recipe-state {
+        right: 32px;
+    }
+
+    .favorite__card {
+        display: inline-block;
+    }
+
+}
+
+@media (max-width: 280px) {
+    .change__recipe-state {
+        right: 0px;
+    }
 }
 </style>
