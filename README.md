@@ -16,9 +16,10 @@ Explore the Tastebite application by checking out our live demo hosted on Netlif
 - **Responsive Design:** Tastebite is designed to provide a seamless experience on various devices.
 - **Favorites Management:** Mark recipes as favorites, remove them, and view your list of favorite recipes.
 
-
 ## Technologies Used
-Vue.js: A progressive JavaScript framework for building user interfaces.
-vue-router: The official router for Vue.js, enabling seamless navigation in a single-page application.
-Axios: A promise-based HTTP client for making API requests.
+
+- **Vue.js:** A progressive JavaScript framework for building user interfaces.
+- **vue-router:** The official router for Vue.js, enabling seamless navigation in a single-page application.
+- **Axios:** A promise-based HTTP client for making API requests.
+
 
