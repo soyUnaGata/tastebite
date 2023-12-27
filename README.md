@@ -7,13 +7,15 @@ Explore the Tastebite application by checking out our live demo hosted on Netlif
 
 
 ## Features
-Main Page Slider: Engage with a visually appealing slider showcasing featured recipes.
-Random Recipe: Discover a new and exciting recipe with the click of a button.
-Category Pages: Explore recipes based on different categories to suit your culinary preferences.
-Search Functionality: Easily find specific recipes using the search feature.
-Recipe Details: Dive into the details of each recipe, including ingredients, instructions, and more.
-Responsive Design: Tastebite is designed to provide a seamless experience on various devices.
-Favorites Management: Mark recipes as favorites, remove them, and view your list of favorite recipes.
+
+- **Main Page Slider:** Engage with a visually appealing slider showcasing featured recipes.
+- **Random Recipe:** Discover a new and exciting recipe with the click of a button.
+- **Category Pages:** Explore recipes based on different categories to suit your culinary preferences.
+- **Search Functionality:** Easily find specific recipes using the search feature.
+- **Recipe Details:** Dive into the details of each recipe, including ingredients, instructions, and more.
+- **Responsive Design:** Tastebite is designed to provide a seamless experience on various devices.
+- **Favorites Management:** Mark recipes as favorites, remove them, and view your list of favorite recipes.
+
 
 ## Technologies Used
 Vue.js: A progressive JavaScript framework for building user interfaces.
