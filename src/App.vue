@@ -33,7 +33,6 @@ export default {
     SearchBar,
     ProfileSection,
     PageFooter
-
   },
 };
 </script>
