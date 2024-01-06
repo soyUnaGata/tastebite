@@ -52,15 +52,11 @@
   display: block;
 }
 
-.dropdown:hover,
-.dropdown:focus,
-.dropdown:active .dropdown-content {
+.dropdown:hover .dropdown-content {
   display: block;
 }
 
-.dropdown:hover,
-.dropdown:focus,
-.dropdown:active .dropdown-item {
+.dropdown:hover .dropdown-item {
   fill: var(--secondary);
 }
 
