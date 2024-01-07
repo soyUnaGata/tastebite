@@ -21,5 +21,6 @@ Explore the Tastebite application by checking out our live demo hosted on Netlif
 - **Vue.js:** A progressive JavaScript framework for building user interfaces.
 - **vue-router:** The official router for Vue.js, enabling seamless navigation in a single-page application.
 - **Axios:** A promise-based HTTP client for making API requests.
+- **lodash.debounce** 
 
 
