@@ -10,25 +10,6 @@ export default {
     components: {
         MealDetails
     },
-    // data() {
-    //     return {
-    //         meal: {}
-    //     }
-    // },
-    // async created() {
-    //     await this.getMealDetails();
-    // },
-    // methods: {
-    //     async getMealDetails() {
-    //         let mealId = this.$route.params.id;
-    //         this.meal = await MealService.search(mealId);
-    //     }
-    // },
-    // async mounted() {
-    //     await this.getMealDetails();
-    //     console.log('was render')
-    // }
-
     data() {
         return {
             id: null,
